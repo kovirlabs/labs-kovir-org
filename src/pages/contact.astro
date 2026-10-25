@@ -1,0 +1,107 @@
+---
+// Netlify Forms detects the form named "contact" in the built HTML. Submissions are emailed to
+// info@kovir.org (set in the Netlify UI). No reCAPTCHA: the honeypot plus Netlify's spam
+// filter keep the page free of third-party scripts.
+import Base from '../layouts/Base.astro';
+import { getProjectViews } from '../lib/project-data.ts';
+
+const projects = await getProjectViews();
+const slugs = projects.map((p) => p.slug).join(' ');
+const types = [
+  { value: 'idea', label: 'Suggest an idea' },
+  { value: 'question', label: 'Question about a project' },
+  { value: 'problem', label: 'Problem with a project' },
+  { value: 'other', label: 'Other' },
+];
+---
+
+<Base title="Contact" description="Suggest an idea, ask a question, or report a problem with a Kovir Labs project.">
+  <section class="section container narrow">
+    <h1>Contact</h1>
+    <p class="lede">
+      Suggest an idea, ask about a project, or tell us what's not working. You can also email <a href="mailto:info@kovir.org">info@kovir.org</a>, or post on the <a href="/ideas">community forum</a>.
+    </p>
+
+    <div id="thanks" class="card thanks" hidden>
+      <h2>Thank you!</h2>
+      <p>Your message reached the Kovir team. We'll reply by email.</p>
+    </div>
+
+    <form
+      id="contact-form"
+      class="card form"
+      name="contact"
+      method="POST"
+      action="/contact?success=true"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      data-slugs={slugs}
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <p class="hp" aria-hidden="true">
+        <label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+      </p>
+
+      <div class="row">
+        <label><span class="lbl">Name <span class="req" aria-hidden="true">*</span></span>
+          <input name="name" autocomplete="name" required />
+        </label>
+        <label><span class="lbl">Email <span class="req" aria-hidden="true">*</span></span>
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+      </div>
+      <label><span class="lbl">Organization <span class="muted">(optional)</span></span>
+        <input name="organization" autocomplete="organization" />
+      </label>
+      <div class="row">
+        <label><span class="lbl">What is this about? <span class="req" aria-hidden="true">*</span></span>
+          <select name="type" required>
+            {types.map((t) => <option value={t.value}>{t.label}</option>)}
+          </select>
+        </label>
+        <label><span class="lbl">Project</span>
+          <select name="project">
+            <option value="">Not about a specific project</option>
+            {projects.map((p) => <option value={p.slug}>{p.name}</option>)}
+          </select>
+        </label>
+      </div>
+      <label><span class="lbl">Message <span class="req" aria-hidden="true">*</span></span>
+        <textarea name="message" rows="7" required></textarea>
+      </label>
+      <label class="check">
+        <input type="checkbox" name="public_ok" value="yes" />
+        <span>OK to post this idea publicly on the forum (without your name or email)</span>
+      </label>
+      <p class="muted small">
+        Fields marked <span aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.
+        See <a href="/privacy">how we handle what you send</a>.
+      </p>
+      <button class="btn" type="submit">Send message</button>
+    </form>
+  </section>
+</Base>
+
+<script>
+  import '../scripts/contact-form.ts';
+</script>
+
+<style>
+  .narrow { max-width: 46rem; }
+  .form { display: grid; gap: 1.1rem; }
+  .row { display: grid; gap: 1.1rem; }
+  @media (min-width: 40rem) { .row { grid-template-columns: 1fr 1fr; } }
+  label { display: grid; gap: 0.35rem; font: 500 0.95rem/1.3 var(--font-head); }
+  input, select, textarea {
+    font: 400 1rem/1.4 var(--font-body); color: var(--text); background: var(--bg);
+    border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 0.7rem; width: 100%;
+  }
+  textarea { resize: vertical; }
+  .check { grid-template-columns: auto 1fr; align-items: start; gap: 0.6rem; font-family: var(--font-body); font-weight: 400; }
+  .check input { width: 1.1rem; height: 1.1rem; margin-top: 0.15rem; }
+  .req { color: var(--highlight); }
+  .small { font-size: 0.875rem; margin: 0; }
+  .form .btn { justify-self: start; }
+  .thanks { margin-bottom: 1.5rem; }
+  .hp { position: absolute; left: -9999px; }
+</style>
