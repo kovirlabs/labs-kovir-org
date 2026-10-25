@@ -5,8 +5,7 @@ owner or the kovir.org team. The site itself is built and tested on the `site-v1
 
 ## 1. Publish the repos (Evan)
 
-- [x] `kovirlabs/labs-kovir-org` is published as a public repo (2026-10-25). `site-v1` was merged
-  into `main` by pull request.
+- [x] `kovirlabs/labs-kovir-org` is published as a public repo (2026-10-25). `site-v1` goes into `main` by pull request.
 
 ```sh
 # Community forum
