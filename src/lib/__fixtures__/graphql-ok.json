@@ -1,0 +1,292 @@
+{
+  "data": {
+    "r0": {
+      "nameWithOwner": "kovirlabs/toril",
+      "url": "https://github.com/kovirlabs/toril",
+      "description": "A small, fast desktop WYSIWYG markdown editor for plain .md files \u2014 inline editing built on Tauri, Rust, and Milkdown. Obsidian-vault compatible.",
+      "stargazerCount": 7,
+      "pushedAt": "2026-10-16T00:13:00Z",
+      "isArchived": false,
+      "isSecurityPolicyEnabled": true,
+      "licenseInfo": {
+        "spdxId": "Apache-2.0"
+      },
+      "repositoryTopics": {
+        "nodes": [
+          {
+            "topic": {
+              "name": "commonmark"
+            }
+          },
+          {
+            "topic": {
+              "name": "desktop-app"
+            }
+          },
+          {
+            "topic": {
+              "name": "markdown"
+            }
+          },
+          {
+            "topic": {
+              "name": "markdown-editor"
+            }
+          },
+          {
+            "topic": {
+              "name": "milkdown"
+            }
+          },
+          {
+            "topic": {
+              "name": "notes"
+            }
+          },
+          {
+            "topic": {
+              "name": "obsidian"
+            }
+          },
+          {
+            "topic": {
+              "name": "prosemirror"
+            }
+          },
+          {
+            "topic": {
+              "name": "rust"
+            }
+          },
+          {
+            "topic": {
+              "name": "tauri"
+            }
+          },
+          {
+            "topic": {
+              "name": "typescript"
+            }
+          },
+          {
+            "topic": {
+              "name": "wysiwyg"
+            }
+          }
+        ]
+      },
+      "contributingGuidelines": {
+        "url": "https://github.com/kovirlabs/toril/blob/main/CONTRIBUTING.md"
+      },
+      "codeOfConduct": {
+        "url": "https://github.com/kovirlabs/toril/blob/main/CODE_OF_CONDUCT.md"
+      },
+      "latestRelease": {
+        "tagName": "v1.1.1",
+        "publishedAt": "2026-10-16T00:18:10Z",
+        "url": "https://github.com/kovirlabs/toril/releases/tag/v1.1.1",
+        "releaseAssets": {
+          "nodes": [
+            {
+              "name": "Toril_1.1.1_aarch64.dmg",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_aarch64.dmg"
+            },
+            {
+              "name": "Toril_aarch64.app.tar.gz",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_aarch64.app.tar.gz"
+            },
+            {
+              "name": "Toril_aarch64.app.tar.gz.sig",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_aarch64.app.tar.gz.sig"
+            },
+            {
+              "name": "Toril_1.1.1_x64.dmg",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_x64.dmg"
+            },
+            {
+              "name": "Toril_x64.app.tar.gz",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_x64.app.tar.gz"
+            },
+            {
+              "name": "Toril_x64.app.tar.gz.sig",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_x64.app.tar.gz.sig"
+            },
+            {
+              "name": "Toril_1.1.1_amd64.deb",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_amd64.deb"
+            },
+            {
+              "name": "Toril_1.1.1_amd64.deb.sig",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_amd64.deb.sig"
+            },
+            {
+              "name": "Toril-1.1.1-1.x86_64.rpm",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril-1.1.1-1.x86_64.rpm"
+            },
+            {
+              "name": "Toril-1.1.1-1.x86_64.rpm.sig",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril-1.1.1-1.x86_64.rpm.sig"
+            },
+            {
+              "name": "Toril_1.1.1_amd64.AppImage",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_amd64.AppImage"
+            },
+            {
+              "name": "Toril_1.1.1_amd64.AppImage.sig",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_amd64.AppImage.sig"
+            },
+            {
+              "name": "Toril_1.1.1_x64_en-US.msi",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_x64_en-US.msi"
+            },
+            {
+              "name": "Toril_1.1.1_x64_en-US.msi.sig",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_x64_en-US.msi.sig"
+            },
+            {
+              "name": "Toril_1.1.1_x64-setup.exe",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_x64-setup.exe"
+            },
+            {
+              "name": "Toril_1.1.1_x64-setup.exe.sig",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_x64-setup.exe.sig"
+            },
+            {
+              "name": "latest.json",
+              "downloadUrl": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/latest.json"
+            }
+          ]
+        }
+      }
+    },
+    "r1": {
+      "nameWithOwner": "kovirlabs/nu",
+      "url": "https://github.com/kovirlabs/nu",
+      "description": "The continuation of the original Mu Editor, to support those who love and depend on it. ",
+      "stargazerCount": 0,
+      "pushedAt": "2026-10-20T22:41:17Z",
+      "isArchived": false,
+      "isSecurityPolicyEnabled": false,
+      "licenseInfo": {
+        "spdxId": "GPL-3.0"
+      },
+      "repositoryTopics": {
+        "nodes": []
+      },
+      "contributingGuidelines": {
+        "url": "https://github.com/kovirlabs/nu/blob/master/CONTRIBUTING.md"
+      },
+      "codeOfConduct": {
+        "url": "https://github.com/kovirlabs/nu/blob/master/CODE_OF_CONDUCT.md"
+      },
+      "latestRelease": null
+    },
+    "forum": {
+      "discussions": {
+        "nodes": [
+          {
+            "number": 4,
+            "title": "Volunteer hour tracking that exports to grant reports",
+            "url": "https://github.com/kovirlabs/community/discussions/4",
+            "closed": false,
+            "createdAt": "2026-10-01T12:00:00Z",
+            "updatedAt": "2026-10-05T12:00:00Z",
+            "upvoteCount": 9,
+            "category": {
+              "name": "Ideas"
+            },
+            "labels": {
+              "nodes": [
+                {
+                  "name": "status: under-review"
+                },
+                {
+                  "name": "source: form"
+                }
+              ]
+            },
+            "comments": {
+              "totalCount": 3
+            }
+          },
+          {
+            "number": 3,
+            "title": "Shared board-minutes template tool",
+            "url": "https://github.com/kovirlabs/community/discussions/3",
+            "closed": false,
+            "createdAt": "2026-09-20T12:00:00Z",
+            "updatedAt": "2026-10-02T12:00:00Z",
+            "upvoteCount": 5,
+            "category": {
+              "name": "Ideas"
+            },
+            "labels": {
+              "nodes": [
+                {
+                  "name": "status: accepted"
+                }
+              ]
+            },
+            "comments": {
+              "totalCount": 1
+            }
+          },
+          {
+            "number": 2,
+            "title": "How do I install Toril on Windows?",
+            "url": "https://github.com/kovirlabs/community/discussions/2",
+            "closed": false,
+            "createdAt": "2026-09-15T12:00:00Z",
+            "updatedAt": "2026-09-16T12:00:00Z",
+            "upvoteCount": 1,
+            "category": {
+              "name": "Q&A"
+            },
+            "labels": {
+              "nodes": []
+            },
+            "comments": {
+              "totalCount": 2
+            }
+          },
+          {
+            "number": 1,
+            "title": "Spam post",
+            "url": "https://github.com/kovirlabs/community/discussions/1",
+            "closed": true,
+            "createdAt": "2026-09-01T12:00:00Z",
+            "updatedAt": "2026-09-01T13:00:00Z",
+            "upvoteCount": 0,
+            "category": {
+              "name": "Ideas"
+            },
+            "labels": {
+              "nodes": []
+            },
+            "comments": {
+              "totalCount": 0
+            }
+          }
+        ]
+      }
+    },
+    "org": {
+      "repositories": {
+        "nodes": [
+          {
+            "nameWithOwner": "kovirlabs/toril",
+            "isArchived": false
+          },
+          {
+            "nameWithOwner": "kovirlabs/nu",
+            "isArchived": false
+          },
+          {
+            "nameWithOwner": "kovirlabs/old-thing",
+            "isArchived": true
+          }
+        ]
+      }
+    }
+  }
+}
