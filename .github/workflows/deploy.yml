@@ -1,10 +1,14 @@
 # Build the site and push it to Netlify. Netlify has no GitHub connection; the site
 # (kovir-labs) is manual-deploy and this workflow is the only thing that publishes it.
 # The daily run refreshes release versions, stars and the idea board without a commit.
+# Pull requests run the checks only. Until the Netlify secrets exist, deploy runs build
+# everything and skip the publish step with a warning instead of failing.
 name: Deploy to Netlify
 
 on:
   push:
+    branches: [main]
+  pull_request:
     branches: [main]
   schedule:
     - cron: '0 6 * * *'
@@ -14,9 +18,11 @@ permissions:
   contents: read
 
 jobs:
-  # Proves the site builds from the committed snapshot alone, as it must when GitHub is down.
+  # Runs the tests, and proves the site builds from the committed snapshot alone, as it must
+  # when GitHub is down. This is also the check on pull requests.
   fallback-build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -24,13 +30,19 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: npm test
+      - run: npm run check
       - run: npm run refresh
         env:
           GITHUB_TOKEN: ''
       - run: npm run build
 
   deploy:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HAS_NETLIFY: ${{ secrets.NETLIFY_AUTH_TOKEN != '' && secrets.NETLIFY_SITE_ID != '' }}
     # Never run two production deploys at once; the newest run wins.
     concurrency:
       group: netlify-production
@@ -50,8 +62,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm run catalog
       - run: npm run build
+      - if: env.HAS_NETLIFY != 'true'
+        run: echo "::warning::NETLIFY_AUTH_TOKEN / NETLIFY_SITE_ID not set — built the site but did not deploy. See docs/LAUNCH.md."
       # --no-build: the CLI builds by default; we already built above.
-      - run: npx --yes netlify-cli@27 deploy --prod --no-build --dir=dist --message "${{ github.sha }}"
+      - if: env.HAS_NETLIFY == 'true'
+        run: npx --yes netlify-cli@27 deploy --prod --no-build --dir=dist --message "${{ github.sha }}"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

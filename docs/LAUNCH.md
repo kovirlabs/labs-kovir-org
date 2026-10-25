@@ -5,12 +5,10 @@ owner or the kovir.org team. The site itself is built and tested on the `site-v1
 
 ## 1. Publish the repos (Evan)
 
-```sh
-# This site
-cd ~/github/labs-kovir-org
-gh repo create kovirlabs/labs-kovir-org --public --source . --push   # pushes main
-git push -u origin site-v1                                          # then open a PR into main
+- [x] `kovirlabs/labs-kovir-org` is published as a public repo (2026-10-25). `site-v1` was merged
+  into `main` by pull request.
 
+```sh
 # Community forum
 cd ~/github/community
 gh repo create kovirlabs/community --public --source . --push
@@ -31,7 +29,15 @@ In the GitHub UI, under `kovirlabs/community`, then Settings, then Discussions:
 - Point org discussions at `kovirlabs/community` under the org's Settings, then Discussions.
 - Seed two or three real ideas.
 
-## 2. Netlify (Evan)
+## 2. Netlify (Evan) — deferred to a later session
+
+Until the two secrets below exist, every run of the deploy workflow does the following:
+
+- runs the tests and checks;
+- refreshes the GitHub data and builds the site;
+- **skips** the publish step, leaving a warning on the run instead of failing.
+
+So merging to `main` is safe before Netlify is set up.
 
 ```sh
 npx netlify-cli@27 sites:create --name kovir-labs     # manual-deploy site, no Git link
