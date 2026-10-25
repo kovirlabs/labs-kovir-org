@@ -1,0 +1,97 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/manrope/500.css';
+@import '@fontsource/manrope/700.css';
+@import '@fontsource/jetbrains-mono/400.css';
+
+:root {
+  --teal: #3a787a;
+  --teal-dark: #2a5657;
+  --gold: #dfad05;
+  --rust: #8d440f;
+  --coral: #fc7a57;
+  --eggshell: #f1eee9;
+  --charcoal: #323232;
+
+  /* Dark is the default theme (see BRAND.md). */
+  --bg: #232626;
+  --surface: #2a5657;
+  --card: #2d3131;
+  --border: #3e4444;
+  --text: #f1eee9;
+  --muted: #bdb7ad;
+  --highlight: #dfad05;
+  --action: #3a787a;
+  --action-hover: #316668;
+  --action-text: #ffffff;
+
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-head: 'Manrope', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --radius: 10px;
+  --max: 72rem;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f1eee9;
+    --surface: #e4ded3;
+    --card: #ffffff;
+    --border: #d6cfc3;
+    --text: #323232;
+    --muted: #5c5852;
+    --highlight: #8d440f;
+    color-scheme: light;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 1.0625rem/1.65 var(--font-body);
+}
+img, svg { max-width: 100%; height: auto; display: block; }
+h1, h2, h3 { font-family: var(--font-head); font-weight: 700; line-height: 1.2; margin: 0 0 0.5em; }
+h1 { font-size: clamp(2rem, 5vw, 3.25rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.01em; }
+h3 { font-size: 1.2rem; }
+p { margin: 0 0 1em; }
+a { color: var(--highlight); text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+code, .mono { font-family: var(--font-mono); font-size: 0.9em; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 3px; }
+
+.container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+.section { padding: 4rem 0; }
+.section-tight { padding: 2.5rem 0; }
+.band { background: var(--surface); }
+.lede { font-size: 1.2rem; color: var(--muted); max-width: 42rem; }
+.muted { color: var(--muted); }
+.eyebrow { font: 400 0.8rem/1 var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--highlight); margin-bottom: 0.75rem; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.7rem 1.2rem; border-radius: var(--radius); border: 2px solid var(--action);
+  background: var(--action); color: var(--action-text);
+  font: 700 1rem/1.2 var(--font-head); text-decoration: none; cursor: pointer;
+}
+.btn:hover { background: var(--action-hover); border-color: var(--action-hover); text-decoration: none; }
+.btn-ghost { background: transparent; color: var(--text); border-color: var(--border); }
+.btn-ghost:hover { background: var(--card); border-color: var(--muted); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+.grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+.prose { max-width: 42rem; }
+.prose p { margin-bottom: 1.1em; }
+
+/* Gold and muted text need to be lighter on the dark-teal band to keep 4.5:1 contrast. */
+.band { --muted: #dcd6cc; --highlight: #f3c93a; }
+@media (prefers-color-scheme: light) {
+  .band { --muted: #5c5852; --highlight: #8d440f; }
+}
