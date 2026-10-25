@@ -1,0 +1,57 @@
+# Build the site and push it to Netlify. Netlify has no GitHub connection; the site
+# (kovir-labs) is manual-deploy and this workflow is the only thing that publishes it.
+# The daily run refreshes release versions, stars and the idea board without a commit.
+name: Deploy to Netlify
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # Proves the site builds from the committed snapshot alone, as it must when GitHub is down.
+  fallback-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run refresh
+        env:
+          GITHUB_TOKEN: ''
+      - run: npm run build
+
+  deploy:
+    runs-on: ubuntu-latest
+    # Never run two production deploys at once; the newest run wins.
+    concurrency:
+      group: netlify-production
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run check
+      # Exits 1 if a curated repo no longer exists on GitHub, which stops the deploy.
+      - run: npm run refresh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm run catalog
+      - run: npm run build
+      # --no-build: the CLI builds by default; we already built above.
+      - run: npx --yes netlify-cli@27 deploy --prod --no-build --dir=dist --message "${{ github.sha }}"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
