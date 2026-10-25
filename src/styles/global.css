@@ -47,6 +47,8 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+/* Component display rules must never override the hidden attribute (filters, thank-you state). */
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
@@ -66,8 +68,8 @@ code, .mono { font-family: var(--font-mono); font-size: 0.9em; }
 :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 3px; }
 
 .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
-.section { padding: 4rem 0; }
-.section-tight { padding: 2.5rem 0; }
+.section { padding-block: 4rem; }
+.section-tight { padding-block: 2.5rem; }
 .band { background: var(--surface); }
 .lede { font-size: 1.2rem; color: var(--muted); max-width: 42rem; }
 .muted { color: var(--muted); }

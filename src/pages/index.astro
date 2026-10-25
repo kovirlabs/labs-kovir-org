@@ -1,7 +1,101 @@
 ---
 import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import IdeaList from '../components/IdeaList.astro';
+import KovirBand from '../components/KovirBand.astro';
+import { getProjects } from '../lib/project-data.ts';
+import { groupBySupport } from '../lib/projects.ts';
+import { toIdeaViews, topIdeas } from '../lib/ideas.ts';
+import { loadSnapshot } from '../lib/snapshot.ts';
+
+const projects = await getProjects();
+const iconFor = new Map(projects.map((p) => [p.view.slug, p.entry.data.icon]));
+const groups = groupBySupport(projects.map((p) => p.view));
+const fromTheLab = [...groups.incubating, ...groups.lab];
+const top = topIdeas(toIdeaViews(loadSnapshot().ideas), 3);
 ---
 
 <Base title="Kovir Labs">
-  <section class="section container"><h1>Kovir Labs</h1></section>
+  <section class="section container hero">
+    <p class="eyebrow">Kovir Labs · the development arm of Kovir LLC</p>
+    <h1>Open software for mission-driven work.<br /><span class="accent">Built once, useful to many organizations.</span></h1>
+    <p class="lede">
+      We build tools that many mission-driven organizations can use, not custom software for one.
+      Anyone can suggest an idea. The kovir.org team decides what we take on.
+    </p>
+    <div class="btn-row">
+      <a class="btn" href="/projects">Browse projects</a>
+      <a class="btn btn-ghost" href="/ideas">Suggest an idea</a>
+    </div>
+  </section>
+
+  {
+    groups.featured.length > 0 && (
+      <section class="section-tight container" id="featured" aria-labelledby="featured-title">
+        <h2 id="featured-title">Officially supported</h2>
+        <div class="grid">
+          {groups.featured.map((v) => (
+            <ProjectCard view={v} icon={iconFor.get(v.slug)} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    fromTheLab.length > 0 && (
+      <section class="section-tight container" aria-labelledby="lab-title">
+        <h2 id="lab-title">From the lab</h2>
+        <p class="muted">Projects in progress or under evaluation. Each page says how mature it is.</p>
+        <div class="grid">
+          {fromTheLab.map((v) => (
+            <ProjectCard view={v} icon={iconFor.get(v.slug)} compact />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <section class="band section" aria-labelledby="how-title">
+    <div class="container">
+      <h2 id="how-title">How ideas become software</h2>
+      <ol class="steps">
+        <li class="card">
+          <span class="num mono">1</span>
+          <h3>Suggest</h3>
+          <p>Anyone can post a need on the <a href="/ideas">community forum</a> or through the <a href="/contact?type=idea">contact form</a>. Upvotes and comments show how widely it's felt.</p>
+        </li>
+        <li class="card">
+          <span class="num mono">2</span>
+          <h3>Kovir decides</h3>
+          <p>The kovir.org team reviews ideas and chooses what Kovir Labs adopts, favoring needs many organizations share. <a href="/about">How decisions are made</a>.</p>
+        </li>
+        <li class="card">
+          <span class="num mono">3</span>
+          <h3>Labs builds and supports</h3>
+          <p>Accepted ideas become open-source tools, maintained by Kovir Labs and free for every organization to use.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="ideas-title">
+    <div class="split">
+      <h2 id="ideas-title">Top ideas right now</h2>
+      <a href="/ideas">All ideas</a>
+    </div>
+    <IdeaList ideas={top} empty="No ideas yet. Be the first to suggest one." />
+  </section>
+
+  <KovirBand />
 </Base>
+
+<style>
+  .hero h1 { max-width: 52rem; }
+  .accent { color: var(--highlight); }
+  .hero .lede { margin-bottom: 1.75rem; }
+  .steps { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+  .steps p { margin: 0; color: var(--muted); }
+  .num { display: inline-grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; border: 1px solid var(--highlight); color: var(--highlight); margin-bottom: 0.75rem; }
+  .split { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+</style>
