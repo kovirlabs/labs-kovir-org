@@ -1,0 +1,16 @@
+---
+import { PLATFORM_LABEL } from '../lib/labels.ts';
+import type { PlatformTag } from '../lib/projects.ts';
+
+interface Props { platforms: PlatformTag[] }
+const { platforms } = Astro.props;
+---
+
+<ul class="platforms" role="list" aria-label="Platforms">
+  {platforms.map((p) => <li>{PLATFORM_LABEL[p]}</li>)}
+</ul>
+
+<style>
+  .platforms { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
+  li { font: 400 0.78rem/1 var(--font-mono); color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 0.3rem 0.45rem; }
+</style>

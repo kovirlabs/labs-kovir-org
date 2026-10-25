@@ -1,0 +1,15 @@
+---
+import type { Support } from '../lib/project-rules.ts';
+
+interface Props { support: Support }
+const { support } = Astro.props;
+const label = { official: 'Officially supported', incubating: 'Incubating', lab: 'From the lab' }[support];
+---
+
+<span class:list={['badge', support]}>{label}</span>
+
+<style>
+  .badge { display: inline-block; font: 400 0.75rem/1 var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; padding: 0.35rem 0.55rem; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
+  .official { background: var(--teal); border-color: var(--gold); color: #fff; }
+  .incubating { border-color: var(--highlight); color: var(--highlight); }
+</style>

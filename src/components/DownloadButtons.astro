@@ -1,0 +1,49 @@
+---
+import type { ProjectView } from '../lib/projects.ts';
+
+interface Props { view: ProjectView }
+const { view } = Astro.props;
+const primary = view.downloads.filter((d) => d.primary);
+const other = view.downloads.filter((d) => !d.primary);
+---
+
+{
+  primary.length > 0 ? (
+    <div class="downloads">
+      <div class="btn-row">
+        {primary.map((d, i) => (
+          <a class:list={['btn', { 'btn-ghost': i > 0 }]} href={d.url}>
+            {d.label}
+          </a>
+        ))}
+      </div>
+      {other.length > 0 && (
+        <details>
+          <summary>Other downloads</summary>
+          <ul>
+            {other.map((d) => (
+              <li><a href={d.url}>{d.label}</a></li>
+            ))}
+          </ul>
+        </details>
+      )}
+      {view.release && (
+        <p class="muted small">
+          {view.release.tag} from <a href={view.release.url}>GitHub Releases</a>.
+        </p>
+      )}
+    </div>
+  ) : (
+    <div class="btn-row">
+      <a class="btn" href={view.primaryAction.url}>{view.primaryAction.label}</a>
+      {view.primaryAction.kind !== 'repo' && <a class="btn btn-ghost" href={view.repoUrl}>View on GitHub</a>}
+    </div>
+  )
+}
+
+<style>
+  .downloads { display: flex; flex-direction: column; gap: 0.75rem; }
+  details ul { margin: 0.5rem 0 0; padding-left: 1.2rem; }
+  summary { cursor: pointer; color: var(--muted); }
+  .small { font-size: 0.875rem; margin: 0; }
+</style>

@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Privacy" description="What labs.kovir.org collects: no cookies or analytics; the contact form only.">
+  <section class="section container prose-page">
+    <h1>Privacy</h1>
+    <p class="lede">This site has no cookies, no analytics, and no third-party scripts. It loads nothing from other servers.</p>
+
+    <h2>The contact form</h2>
+    <p>
+      When you send the <a href="/contact">contact form</a>, it collects your name, email address,
+      organization if you give one, and your message. The form is processed and stored by our host, <a href="https://www.netlify.com/privacy/">Netlify</a>, which checks it for spam using Akismet, and it is emailed to the Kovir team.
+    </p>
+    <p>
+      We use what you send only to reply to you. If you tick "OK to post this idea publicly", we may also
+      post your idea on the community forum, without your name, email or organization. We never sell or share
+      your details.
+    </p>
+
+    <h2>The community forum</h2>
+    <p>
+      The <a href="https://github.com/kovirlabs/community/discussions">community forum</a> is hosted on
+      GitHub. Anything you post there is public and covered by GitHub's <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">privacy statement</a>.
+      This site shows forum titles and vote counts, copied once a day.
+    </p>
+
+    <h2>More detail</h2>
+    <p>
+      Kovir Labs is part of Kovir LLC. The <a href="https://www.kovir.org/privacy">Kovir LLC privacy policy</a>
+      covers your rights and how to contact us about your data. You can also email <a href="mailto:info@kovir.org">info@kovir.org</a>.
+    </p>
+  </section>
+</Base>
+
+<style>
+  .prose-page { max-width: 46rem; }
+  .prose-page h2 { margin-top: 2rem; }
+</style>

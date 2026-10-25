@@ -1,0 +1,32 @@
+---
+import type { IdeaView } from '../lib/ideas.ts';
+
+interface Props { ideas: IdeaView[]; empty: string }
+const { ideas, empty } = Astro.props;
+---
+
+{
+  ideas.length === 0 ? (
+    <p class="muted">{empty}</p>
+  ) : (
+    <ol class="ideas" role="list">
+      {ideas.map((idea) => (
+        <li class="card idea">
+          <a href={idea.url} class="title">{idea.title}</a>
+          <span class="mono muted counts">
+            <span><span aria-hidden="true">▲</span> {idea.upvotes}<span class="visually-hidden"> upvotes</span></span>
+            <span><span aria-hidden="true">💬</span> {idea.comments}<span class="visually-hidden"> comments</span></span>
+          </span>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
+<style>
+  .ideas { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+  .idea { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem 1rem; padding: 0.9rem 1.1rem; }
+  .title { color: var(--text); font-weight: 700; text-decoration: none; }
+  .title:hover { text-decoration: underline; }
+  .counts { display: flex; gap: 1rem; font-size: 0.85rem; }
+</style>

@@ -57,3 +57,7 @@ Requires Node `>=22.23.4`, Astro's floor.
 - Deploys run from `.github/workflows/deploy.yml` to the Netlify site `kovir-labs` on push to
   `main` and daily at 06:00 UTC. They need the repo secrets `NETLIFY_AUTH_TOKEN` and
   `NETLIFY_SITE_ID`.
+  - GitHub silently disables the daily schedule after 60 days without repo activity. Re-enable it
+    under Actions if release data looks stale.
+  - The contact form posts to `/contact/thanks/`. Netlify form detection must be enabled on the
+    site.

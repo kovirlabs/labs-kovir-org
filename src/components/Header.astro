@@ -1,0 +1,39 @@
+---
+// Four links fit on one row on desktop and wrap on phones, so the nav needs no JavaScript.
+const path = Astro.url.pathname;
+const links = [
+  { href: '/projects', label: 'Projects' },
+  { href: '/ideas', label: 'Ideas' },
+  { href: '/about', label: 'About' },
+];
+const current = (href: string) => path === href || path.startsWith(`${href}/`);
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a href="/" class="brand" aria-label="Kovir Labs — home">
+      <picture>
+        <source srcset="/logo-labs-light.svg" media="(prefers-color-scheme: light)" />
+        <img src="/logo-labs-dark.svg" alt="Kovir Labs" width="190" height="37" />
+      </picture>
+    </a>
+    <nav aria-label="Primary">
+      <ul>
+        {links.map((l) => (
+          <li><a href={l.href} aria-current={current(l.href) ? 'page' : undefined}>{l.label}</a></li>
+        ))}
+        <li><a class="btn" href="/contact" aria-current={current('/contact') ? 'page' : undefined}>Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header { border-bottom: 1px solid var(--border); }
+  .bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; padding-top: 1rem; padding-bottom: 1rem; }
+  .brand img { width: 190px; height: auto; }
+  ul { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1.25rem; list-style: none; margin: 0; padding: 0; }
+  nav a:not(.btn) { color: var(--text); text-decoration: none; font: 500 1rem/1 var(--font-head); padding: 0.5rem 0; border-bottom: 2px solid transparent; }
+  nav a:not(.btn):hover, nav a[aria-current='page']:not(.btn) { border-bottom-color: var(--highlight); }
+  .btn { padding: 0.55rem 1rem; }
+</style>
