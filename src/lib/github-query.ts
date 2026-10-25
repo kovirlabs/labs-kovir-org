@@ -7,17 +7,19 @@ export const FORUM_REPO = 'kovirlabs/community';
 
 const REPO_NAME = /^[\w.-]+\/[\w.-]+$/;
 
-const REPO_FIELDS = `nameWithOwner url description stargazerCount pushedAt isArchived isSecurityPolicyEnabled
+const REPO_FIELDS = `nameWithOwner isPrivate url description stargazerCount pushedAt isArchived isSecurityPolicyEnabled
     licenseInfo { spdxId }
     repositoryTopics(first: 20) { nodes { topic { name } } }
     contributingGuidelines { url }
     codeOfConduct { url }
     latestRelease { tagName publishedAt url releaseAssets(first: 50) { nodes { name downloadUrl } } }`;
 
-function repoBlock(alias: string, fullName: string, fields: string): string {
+// followRenames: false makes a renamed repo answer NOT_FOUND, so it can't stay listed by its old name.
+function repoBlock(alias: string, fullName: string, fields: string, followRenames = true): string {
   if (!REPO_NAME.test(fullName)) throw new Error(`invalid repo name: ${JSON.stringify(fullName)}`);
   const [owner, name] = fullName.split('/');
-  return `  ${alias}: repository(owner: "${owner}", name: "${name}") {\n    ${fields}\n  }`;
+  const follow = followRenames ? '' : ', followRenames: false';
+  return `  ${alias}: repository(owner: "${owner}", name: "${name}"${follow}) {\n    ${fields}\n  }`;
 }
 
 export function buildQuery(repos: string[]): { query: string; aliases: Record<string, string> } {
@@ -25,7 +27,7 @@ export function buildQuery(repos: string[]): { query: string; aliases: Record<st
   const blocks = repos.map((repo, i) => {
     const alias = `r${i}`;
     aliases[alias] = repo;
-    return repoBlock(alias, repo, REPO_FIELDS);
+    return repoBlock(alias, repo, REPO_FIELDS, false);
   });
   blocks.push(
     repoBlock(
@@ -99,7 +101,10 @@ export function normalize(json: unknown, aliases: Record<string, string>): Norma
 
   for (const [alias, repo] of Object.entries(aliases)) {
     const r = data[alias];
-    if (r) out.repos[repo] = toRepoFacts(r);
+    // A private repo, or one answering under another name, must never be listed: treat as missing.
+    const listable = r && !r.isPrivate && String(r.nameWithOwner).toLowerCase() === repo.toLowerCase();
+    if (listable) out.repos[repo] = toRepoFacts(r);
+    else if (r) out.missing.push(repo);
     else if (errorType(alias) === 'NOT_FOUND') out.missing.push(repo);
     else out.failed.push(repo);
   }

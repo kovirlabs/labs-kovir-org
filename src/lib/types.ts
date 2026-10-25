@@ -45,7 +45,7 @@ export type Normalized = {
   ideas: IdeaFacts[] | null;
   /** null when the org block could not be read. Archived repos are excluded. */
   publicRepos: string[] | null;
-  /** Curated repos GitHub reported as NOT_FOUND. */
+  /** Curated repos GitHub reported as NOT_FOUND, or that are private or renamed. */
   missing: string[];
   /** Curated repos that errored for any other reason. */
   failed: string[];

@@ -6,7 +6,7 @@ interface Props { platforms: PlatformTag[] }
 const { platforms } = Astro.props;
 ---
 
-<ul class="platforms" aria-label="Platforms">
+<ul class="platforms" role="list" aria-label="Platforms">
   {platforms.map((p) => <li>{PLATFORM_LABEL[p]}</li>)}
 </ul>
 

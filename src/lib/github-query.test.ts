@@ -9,7 +9,7 @@ const fixture = (name: string): unknown =>
 test('buildQuery: one aliased repository block per curated repo, plus forum and org', () => {
   const { query, aliases } = buildQuery(['kovirlabs/toril', 'kovirlabs/nu']);
   assert.deepEqual(aliases, { r0: 'kovirlabs/toril', r1: 'kovirlabs/nu' });
-  assert.ok(query.includes('r1: repository(owner: "kovirlabs", name: "nu")'));
+  assert.ok(query.includes('r1: repository(owner: "kovirlabs", name: "nu", followRenames: false)'));
   assert.ok(query.includes('forum: repository(owner: "kovirlabs", name: "community")'));
   assert.ok(query.includes('org: organization(login: "kovirlabs")'));
 });
@@ -56,4 +56,30 @@ test('normalize: partial results sort NOT_FOUND into missing, other errors into 
   assert.deepEqual(n.failed, ['kovirlabs/x']);
   assert.equal(n.ideas, null);
   assert.ok(n.repos['kovirlabs/toril']);
+});
+
+test('buildQuery: renamed repos are not followed, so they surface as NOT_FOUND (review finding 2)', () => {
+  const { query } = buildQuery(['kovirlabs/toril']);
+  assert.ok(query.includes('r0: repository(owner: "kovirlabs", name: "toril", followRenames: false)'));
+  assert.ok(query.includes('isPrivate'));
+});
+
+const okWith = (patch: (d: any) => void): unknown => {
+  const body = fixture('graphql-ok') as any;
+  patch(body.data);
+  return body;
+};
+
+test('normalize: a repo answering under a different name counts as missing (review finding 2)', () => {
+  const { aliases } = buildQuery(['kovirlabs/toril', 'kovirlabs/nu']);
+  const n = normalize(okWith((d) => (d.r0.nameWithOwner = 'kovirlabs/toril-editor')), aliases);
+  assert.deepEqual(n.missing, ['kovirlabs/toril']);
+  assert.equal(n.repos['kovirlabs/toril'], undefined);
+});
+
+test('normalize: a private repo counts as missing and none of its data is kept (review finding 3)', () => {
+  const { aliases } = buildQuery(['kovirlabs/toril', 'kovirlabs/nu']);
+  const n = normalize(okWith((d) => (d.r1.isPrivate = true)), aliases);
+  assert.deepEqual(n.missing, ['kovirlabs/nu']);
+  assert.equal(n.repos['kovirlabs/nu'], undefined);
 });

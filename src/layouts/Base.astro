@@ -12,12 +12,15 @@ interface Props {
   ogImage?: ImageMetadata;
   /** Structured data, rendered as application/ld+json. */
   jsonLd?: object;
+  /** Keep this page out of search results (e.g. the form thank-you page). */
+  noindex?: boolean;
 }
 
 const {
   title,
   ogImage,
   jsonLd,
+  noindex = false,
   description = 'Kovir Labs builds open software for mission-driven work: tools many organizations can use. The development arm of Kovir LLC.',
 } = Astro.props;
 
@@ -36,6 +39,7 @@ const image = ogImage
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="theme-color" content="#232626" media="(prefers-color-scheme: dark)" />

@@ -9,13 +9,13 @@ const { ideas, empty } = Astro.props;
   ideas.length === 0 ? (
     <p class="muted">{empty}</p>
   ) : (
-    <ol class="ideas">
+    <ol class="ideas" role="list">
       {ideas.map((idea) => (
         <li class="card idea">
           <a href={idea.url} class="title">{idea.title}</a>
           <span class="mono muted counts">
-            <span aria-label={`${idea.upvotes} upvotes`}>▲ {idea.upvotes}</span>
-            <span aria-label={`${idea.comments} comments`}>💬 {idea.comments}</span>
+            <span><span aria-hidden="true">▲</span> {idea.upvotes}<span class="visually-hidden"> upvotes</span></span>
+            <span><span aria-hidden="true">💬</span> {idea.comments}<span class="visually-hidden"> comments</span></span>
           </span>
         </li>
       ))}

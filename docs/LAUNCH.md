@@ -41,12 +41,22 @@ gh secret set NETLIFY_SITE_ID   -R kovirlabs/labs-kovir-org
 
 1. Merge `site-v1` into `main`. Both workflow jobs should pass, and `kovir-labs.netlify.app` should
    serve the site.
-2. Submit the contact form once on the live site. Under Netlify, then Forms, then `contact`, set
+2. In Netlify, go to Forms, select **Enable form detection**, then trigger a redeploy
+   (`gh workflow run deploy.yml -R kovirlabs/labs-kovir-org`). Form detection is off by default
+   on new sites, and until it's on, submissions return 404.
+3. Submit the contact form once on the live site. It should land on `/contact/thanks/`. Under Netlify, then Forms, then `contact`, set
    the notification email to **info@kovir.org** and confirm the test email arrives.
-3. Submit again with the hidden `bot-field` filled in through devtools. Nothing should be
+4. Submit again with the hidden `bot-field` filled in through devtools. Nothing should be
    delivered.
-4. Check that the response headers include the CSP from `netlify.toml`:
-   `curl -sI https://kovir-labs.netlify.app | grep -i content-security`.
+5. Check that the response headers include the CSP from `netlify.toml`:
+   `curl -sI https://kovir-labs.netlify.app | grep -i content-security`. Then load the
+   site with the browser console open and confirm there are no CSP violations.
+6. **The daily refresh can switch itself off.** GitHub disables scheduled workflows in public
+   repos after 60 days with no repository activity, and it does this silently. That would freeze
+   release versions and the idea board.
+   - Check **Actions → Deploy to Netlify** now and then. If GitHub has disabled the schedule,
+     select **Enable workflow**.
+   - Any push to `main`, such as a project file edit, resets the 60-day clock.
 
 ## 3. DNS (owner)
 

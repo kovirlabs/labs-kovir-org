@@ -22,17 +22,13 @@ const types = [
       Suggest an idea, ask about a project, or tell us what's not working. You can also email <a href="mailto:info@kovir.org">info@kovir.org</a>, or post on the <a href="/ideas">community forum</a>.
     </p>
 
-    <div id="thanks" class="card thanks" hidden>
-      <h2>Thank you!</h2>
-      <p>Your message reached the Kovir team. We'll reply by email.</p>
-    </div>
 
     <form
       id="contact-form"
       class="card form"
       name="contact"
       method="POST"
-      action="/contact?success=true"
+      action="/contact/thanks/"
       data-netlify="true"
       netlify-honeypot="bot-field"
       data-slugs={slugs}
@@ -71,7 +67,7 @@ const types = [
       </label>
       <label class="check">
         <input type="checkbox" name="public_ok" value="yes" />
-        <span>OK to post this idea publicly on the forum (without your name or email)</span>
+        <span>OK to post this idea publicly on the forum (without your name, email or organization)</span>
       </label>
       <p class="muted small">
         Fields marked <span aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.
@@ -102,6 +98,5 @@ const types = [
   .req { color: var(--highlight); }
   .small { font-size: 0.875rem; margin: 0; }
   .form .btn { justify-self: start; }
-  .thanks { margin-bottom: 1.5rem; }
   .hp { position: absolute; left: -9999px; }
 </style>

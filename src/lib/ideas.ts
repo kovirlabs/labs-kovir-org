@@ -31,8 +31,9 @@ export function toIdeaViews(ideas: IdeaFacts[]): IdeaView[] {
   for (const idea of ideas) {
     if (idea.category !== 'Ideas') continue;
     const labeled = ideaStatus(idea.labels);
-    // A closed idea nobody labeled is spam or a duplicate: keep it off the board.
-    if (idea.closed && !labeled) continue;
+    // A closed idea that was never decided (no label, or only the template's automatic
+    // under-review label) is spam or a duplicate: keep it off the board.
+    if (idea.closed && (!labeled || labeled === 'under-review')) continue;
     views.push({
       number: idea.number,
       title: idea.title,

@@ -24,3 +24,19 @@ test('no line ends in text when the next line starts with an inline link', () =>
   }
   assert.deepEqual(offenders, []);
 });
+
+test('no aria-label on generic <span> elements (screen readers ignore it; use visually-hidden text)', () => {
+  const offenders: string[] = [];
+  for (const file of astroFiles(SRC)) {
+    readFileSync(file, 'utf8').split('\n').forEach((line, i) => {
+      if (/<span\b[^>]*\baria-label=/.test(line)) offenders.push(`${file.replace(SRC, 'src/')}:${i + 1}`);
+    });
+  }
+  assert.deepEqual(offenders, []);
+});
+
+test('the contact form posts to a real thank-you page, so confirmation works without JavaScript', () => {
+  const contact = readFileSync(join(SRC, 'pages/contact.astro'), 'utf8');
+  assert.match(contact, /action="\/contact\/thanks\/"/);
+  assert.ok(astroFiles(join(SRC, 'pages')).some((f) => f.endsWith('pages/contact/thanks.astro')));
+});

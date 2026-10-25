@@ -14,7 +14,9 @@ const result = await refresh({ token: process.env.GITHUB_TOKEN || undefined, rep
 if (result.kind === 'fallback') {
   console.warn(`refresh skipped: ${result.reason}; using committed snapshot`);
 } else if (result.kind === 'missing') {
-  console.error(`repo not found on GitHub: ${result.repos.join(', ')} — fix or remove the project file`);
+  console.error(
+    `repo not found, renamed, or private on GitHub: ${result.repos.join(', ')} — fix or remove the project file (private repos are never listed)`,
+  );
   process.exit(1);
 } else {
   for (const w of result.warnings) console.warn(`warning: ${w}`);

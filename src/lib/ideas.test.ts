@@ -82,3 +82,8 @@ test('topIdeas: open statuses only, at most n', () => {
   ]);
   assert.deepEqual(topIdeas(views, 3).map((v) => v.title), ['one', 'two', 'three']);
 });
+
+test('toIdeaViews: closed with only the auto-applied under-review label is hidden (review finding 1)', () => {
+  const views = toIdeaViews([idea({ title: 'dup', closed: true, labels: ['status: under-review'] })]);
+  assert.deepEqual(views, []);
+});
