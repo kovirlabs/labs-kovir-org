@@ -5,28 +5,26 @@ owner or the kovir.org team. The site itself is built and tested on the `site-v1
 
 ## 1. Publish the repos (Evan)
 
+- [x] `kovirlabs/community` is published with Discussions on and the 7 labels created
+  (2026-10-25). GitHub's default categories already include Ideas (slug `ideas`), Q&A,
+  Announcements and Show and tell. The site's refresh reads the forum.
+- [ ] Optional: delete the extra default categories **General** and **Polls** under the
+  forum's Settings, then Discussions. There is no API for this.
+- [ ] Seed two or three real ideas on the forum.
 - [x] `kovirlabs/labs-kovir-org` is published as a public repo (2026-10-25). `site-v1` goes into `main` by pull request.
 
 ```sh
-# Community forum
-cd ~/github/community
-gh repo create kovirlabs/community --public --source . --push
-gh repo edit kovirlabs/community --enable-discussions
-./scripts/setup.sh                                                  # creates the 7 labels
-
 # Org profile
 cd ~/github/kovirlabs-dot-github
 gh repo create kovirlabs/.github --public --source . --push
 gh api -X PATCH orgs/kovirlabs -f blog=https://labs.kovir.org
 ```
 
-In the GitHub UI, under `kovirlabs/community`, then Settings, then Discussions:
+In the GitHub UI, point org discussions at `kovirlabs/community` under the org's Settings,
+then Discussions.
 
-- Create the categories **Ideas** (open-ended, slug `ideas`), **Q&A** (question and answer),
-  **Announcements** (announcement), and **Show and tell** (open-ended).
-- Delete the default categories you don't want.
-- Point org discussions at `kovirlabs/community` under the org's Settings, then Discussions.
-- Seed two or three real ideas.
+**Wait for hosting** before publishing the org profile and setting the org website field. Both
+link to labs.kovir.org, which won't resolve until DNS and Netlify are done.
 
 ## 2. Netlify (Evan) — deferred to a later session
 
