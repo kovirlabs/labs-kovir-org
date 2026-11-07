@@ -33,7 +33,7 @@ test('kovir.css uses no class selectors', () => {
   assert.doesNotMatch(css, /(^|[\s,>+~(])\.[a-z_-]/im);
 });
 
-test('.astro files use only documented TagBrush classes', { todo: 'Task 6' }, () => {
+test('.astro files use only documented TagBrush classes', () => {
   const bad = astroFiles(join(ROOT, 'src')).flatMap((f) =>
     classTokens(readFileSync(f, 'utf8'))
       .filter((t) => !DOCUMENTED.includes(t))
@@ -42,7 +42,7 @@ test('.astro files use only documented TagBrush classes', { todo: 'Task 6' }, ()
   assert.deepEqual(bad, []);
 });
 
-test('no <style> blocks in .astro files', { todo: 'Task 6' }, () => {
+test('no <style> blocks in .astro files', () => {
   const bad = astroFiles(join(ROOT, 'src')).filter((f) => /<style[\s>]/.test(readFileSync(f, 'utf8')));
   assert.deepEqual(
     bad.map((f) => f.slice(ROOT.length)),

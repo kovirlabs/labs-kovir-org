@@ -20,6 +20,8 @@
   --color-heading: light-dark(#323232, #f1eee9);
   --color-text-muted: light-dark(#5c5852, #bdb7ad);
   --color-highlight: light-dark(#8d440f, #dfad05);
+  /* Links in Kovir gold (dark) and rust (light), as on the old site; both pass 4.5:1. */
+  --color-link: var(--color-highlight);
   --font-family-heading: 'Manrope', system-ui, sans-serif;
   --font-family-base: 'Inter', system-ui, sans-serif;
   --font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -146,4 +148,15 @@ mark[data-tone='info'] {
   width: 88px;
   height: 88px;
   border-radius: 18px;
+}
+
+/* Top-bar links read as text with a gold underline on the current page, as on the old site;
+   the Contact button keeps its button styling. */
+body > header > nav li > a:not([class]) {
+  color: var(--color-text);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+body > header > nav li > a:not([class]):is(:hover, [aria-current='page']) {
+  border-bottom-color: var(--color-highlight);
 }

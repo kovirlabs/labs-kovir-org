@@ -30,5 +30,5 @@ const updated = formatUpdated(fetchedAt);
     </ul>
   </nav>
   <p>© {year} Kovir LLC · <a href="https://www.kovir.org">kovir.org</a></p>
-  {updated && fetchedAt && <p>Project data updated <time datetime={fetchedAt}>{updated}</time></p>}
+  {updated && fetchedAt && <p>Project data updated <time datetime={fetchedAt.slice(0, 10)}>{updated}</time></p>}
 </footer>
