@@ -14,7 +14,8 @@
     "astro": "astro",
     "test": "node --test 'src/**/*.test.ts' 'scripts/**/*.test.ts'",
     "refresh": "node scripts/refresh-github.ts",
-    "catalog": "node scripts/check-catalog.ts"
+    "catalog": "node scripts/check-catalog.ts",
+    "tagcheck": "node scripts/tagcheck.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@kovirlabs/tagcheck": "^0.1.1",
     "playwright": "^1.65.0",
     "typescript": "^6.0.3"
   }

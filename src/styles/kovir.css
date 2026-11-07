@@ -117,6 +117,10 @@ mark[data-tone='success'] {
   border: 1px solid #dfad05;
   color: #fff;
 }
+/* A link inside a badge (the repository table's "Project page") takes the badge's text color. */
+mark[data-tone] a {
+  color: inherit;
+}
 mark[data-tone='info'] {
   background: transparent;
   border: 1px solid var(--color-highlight);
@@ -131,6 +135,8 @@ mark[data-tone='info'] {
 #get-involved {
   --color-text-muted: light-dark(#5c5852, #dcd6cc);
   --color-highlight: light-dark(#8d440f, #f3c93a);
+  /* --color-link is resolved at :root, so the lighter band gold has to be set again here. */
+  --color-link: light-dark(#8d440f, #f3c93a);
   background: light-dark(#e4ded3, #2a5657);
   box-shadow: 0 0 0 100vmax light-dark(#e4ded3, #2a5657);
   clip-path: inset(0 -100vmax);
