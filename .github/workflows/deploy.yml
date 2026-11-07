@@ -36,6 +36,10 @@ jobs:
         env:
           GITHUB_TOKEN: ''
       - run: npm run build
+      # TagCheck --strict --browser over every built page: semantics, Tag family vocabulary,
+      # contrast in light and dark mode, and phone-width overflow. Any finding fails the job.
+      - run: npx playwright install --with-deps chromium
+      - run: npm run tagcheck
 
   deploy:
     if: github.event_name != 'pull_request'
@@ -62,6 +66,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm run catalog
       - run: npm run build
+      # TagCheck --strict --browser over every built page: semantics, Tag family vocabulary,
+      # contrast in light and dark mode, and phone-width overflow. Any finding fails the job.
+      - run: npx playwright install --with-deps chromium
+      - run: npm run tagcheck
       - if: env.HAS_NETLIFY != 'true'
         run: echo "::warning::NETLIFY_AUTH_TOKEN / NETLIFY_SITE_ID not set — built the site but did not deploy. See docs/LAUNCH.md."
       # --no-build: the CLI builds by default; we already built above.

@@ -9,10 +9,10 @@ const other = view.downloads.filter((d) => !d.primary);
 
 {
   primary.length > 0 ? (
-    <div class="downloads">
-      <div class="btn-row">
+    <>
+      <div role="group">
         {primary.map((d, i) => (
-          <a class:list={['btn', { 'btn-ghost': i > 0 }]} href={d.url}>
+          <a class={i === 0 ? 'button' : 'button secondary'} href={d.url}>
             {d.label}
           </a>
         ))}
@@ -28,22 +28,13 @@ const other = view.downloads.filter((d) => !d.primary);
         </details>
       )}
       {view.release && (
-        <p class="muted small">
-          {view.release.tag} from <a href={view.release.url}>GitHub Releases</a>.
-        </p>
+        <p><small>{view.release.tag} from <a href={view.release.url}>GitHub Releases</a>.</small></p>
       )}
-    </div>
+    </>
   ) : (
-    <div class="btn-row">
-      <a class="btn" href={view.primaryAction.url}>{view.primaryAction.label}</a>
-      {view.primaryAction.kind !== 'repo' && <a class="btn btn-ghost" href={view.repoUrl}>View on GitHub</a>}
+    <div role="group">
+      <a class="button" href={view.primaryAction.url}>{view.primaryAction.label}</a>
+      {view.primaryAction.kind !== 'repo' && <a class="button secondary" href={view.repoUrl}>View on GitHub</a>}
     </div>
   )
 }
-
-<style>
-  .downloads { display: flex; flex-direction: column; gap: 0.75rem; }
-  details ul { margin: 0.5rem 0 0; padding-left: 1.2rem; }
-  summary { cursor: pointer; color: var(--muted); }
-  .small { font-size: 0.875rem; margin: 0; }
-</style>

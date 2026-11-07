@@ -14,17 +14,22 @@
     "astro": "astro",
     "test": "node --test 'src/**/*.test.ts' 'scripts/**/*.test.ts'",
     "refresh": "node scripts/refresh-github.ts",
-    "catalog": "node scripts/check-catalog.ts"
+    "catalog": "node scripts/check-catalog.ts",
+    "tagcheck": "node scripts/tagcheck.ts && node scripts/browser-probe.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
     "@fontsource/inter": "^5.3.0",
     "@fontsource/jetbrains-mono": "^5.3.0",
     "@fontsource/manrope": "^5.3.0",
-    "astro": "^7.4.2"
+    "astro": "^7.4.2",
+    "tagaction": "^0.1.0",
+    "tagbrush": "^1.2.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@kovirlabs/tagcheck": "^0.1.1",
+    "playwright": "^1.65.0",
     "typescript": "^6.0.3"
   }
 }

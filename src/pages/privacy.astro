@@ -3,9 +3,11 @@ import Base from '../layouts/Base.astro';
 ---
 
 <Base title="Privacy" description="What labs.kovir.org collects: no cookies or analytics; the contact form only.">
-  <section class="section container prose-page">
-    <h1>Privacy</h1>
-    <p class="lede">This site has no cookies, no analytics, and no third-party scripts. It loads nothing from other servers.</p>
+  <article>
+    <hgroup>
+      <h1>Privacy</h1>
+      <p>This site has no cookies, no analytics, and no third-party scripts. It loads nothing from other servers.</p>
+    </hgroup>
 
     <h2>The contact form</h2>
     <p>
@@ -27,13 +29,8 @@ import Base from '../layouts/Base.astro';
 
     <h2>More detail</h2>
     <p>
-      Kovir Labs is part of Kovir LLC. The <a href="https://www.kovir.org/privacy">Kovir LLC privacy policy</a>
-      covers your rights and how to contact us about your data. You can also email <a href="mailto:info@kovir.org">info@kovir.org</a>.
+      Kovir Labs is part of Kovir LLC. The <a href="https://www.kovir.org/privacy">Kovir LLC privacy policy</a> covers your rights and how to contact us about your data. You can also email <a href="mailto:info@kovir.org">info@kovir.org</a>.
     </p>
-  </section>
+  </article>
 </Base>
 
-<style>
-  .prose-page { max-width: 46rem; }
-  .prose-page h2 { margin-top: 2rem; }
-</style>

@@ -1,0 +1,169 @@
+/* Kovir Labs theme for TagBrush.css. TagBrush styles the HTML; this file only sets Kovir's
+   palette and fonts through TagBrush's documented variables, plus the few brand touches
+   TagBrush can't express. No class selectors: rules target ids, structure and documented
+   attributes, so TagCheck stays clean. */
+
+/* Self-hosted fonts (the CSP allows no font CDN). */
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/manrope/500.css';
+@import '@fontsource/manrope/700.css';
+@import '@fontsource/jetbrains-mono/400.css';
+
+/* Kovir palette, light / dark. The site follows the reader's color scheme. */
+:root {
+  --color-primary: #3a787a;
+  --color-background: light-dark(#f1eee9, #232626);
+  --color-surface: light-dark(#ffffff, #2d3131);
+  --color-border: light-dark(#d6cfc3, #3e4444);
+  --color-text: light-dark(#323232, #f1eee9);
+  --color-heading: light-dark(#323232, #f1eee9);
+  --color-text-muted: light-dark(#5c5852, #bdb7ad);
+  --color-highlight: light-dark(#8d440f, #dfad05);
+  /* Links in Kovir gold (dark) and rust (light), as on the old site; both pass 4.5:1. */
+  --color-link: var(--color-highlight);
+  /* Form error text: TagBrush's default red is 4.17:1 on eggshell; these pass 4.5:1. */
+  --color-error: light-dark(#b91c1c, #f87171);
+  --font-family-heading: 'Manrope', system-ui, sans-serif;
+  --font-family-base: 'Inter', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --border-radius: 10px;
+  /* The hero sits on a soft tint toward Kovir's dark teal. */
+  --hero-background: color-mix(in srgb, var(--color-background) 82%, #2a5657);
+}
+
+/* The logo is an image link, not the usual <strong> site name, so give it the bar's height. */
+body > header > nav > a:first-child img {
+  display: block;
+  width: auto;
+  height: 2.3rem;
+}
+
+/* The skip link sits above the page until it receives keyboard focus. (TagBrush's
+   .visually-hidden uses !important in a layer, so a :focus override can't undo it.) */
+body > a[href='#main'] {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  background: var(--color-primary);
+  color: #fff;
+  transform: translateY(-200%);
+}
+body > a[href='#main']:focus {
+  transform: none;
+}
+
+/* Hero: the heading's second line keeps Kovir's accent color. */
+body > header hgroup h1 em {
+  font-style: normal;
+  color: var(--color-highlight);
+}
+
+/* Project cards: the icon (or the first-letter monogram when a project has none) sits beside
+   the title, as on the old cards. */
+main article[data-category] > header {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+main article[data-category] > header > :is(img, span) {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  object-fit: contain;
+}
+main article[data-category] > header > span {
+  display: grid;
+  place-items: center;
+  background: #2a5657;
+  color: #f1eee9;
+  font: 700 1.6rem/1 var(--font-family-heading);
+}
+#from-the-lab article[data-category] > header > :is(img, span) {
+  width: 44px;
+  height: 44px;
+}
+
+/* The whole card opens the project: the title link stretches over it, and the card shows the
+   focus ring instead of the link. */
+main article[data-category] {
+  position: relative;
+}
+main article[data-category] h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+main article[data-category] h3 a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--border-radius);
+}
+main article[data-category] h3 a:focus-visible {
+  outline: none;
+}
+main article[data-category]:has(h3 a:focus-visible) {
+  outline: 3px solid #dfad05;
+  outline-offset: 2px;
+}
+
+/* Support badges in Kovir colors. The CSP forbids TagBrush's inline --tone override, so the
+   official teal-with-gold and the outlined incubating badge are set here. */
+mark[data-tone='success'] {
+  background: #3a787a;
+  border: 1px solid #dfad05;
+  color: #fff;
+}
+/* A link inside a badge (the repository table's "Project page") takes the badge's text color. */
+mark[data-tone] a {
+  color: inherit;
+}
+mark[data-tone='info'] {
+  background: transparent;
+  border: 1px solid var(--color-highlight);
+  color: var(--color-highlight);
+}
+
+/* The teal band behind "How ideas become software", "Part of Kovir LLC" and a project's
+   "Get involved", full width as on
+   the old site. Muted text and gold are lightened on dark teal to keep 4.5:1 contrast. */
+#how-it-works,
+#kovir-band,
+#get-involved {
+  --color-text-muted: light-dark(#5c5852, #dcd6cc);
+  --color-highlight: light-dark(#8d440f, #f3c93a);
+  /* --color-link is resolved at :root, so the lighter band gold has to be set again here. */
+  --color-link: light-dark(#8d440f, #f3c93a);
+  background: light-dark(#e4ded3, #2a5657);
+  box-shadow: 0 0 0 100vmax light-dark(#e4ded3, #2a5657);
+  clip-path: inset(0 -100vmax);
+  padding-block: 2.5rem;
+}
+
+/* A project page's icon sits beside its name. */
+#project > header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+#project > header > img {
+  flex: none;
+  width: 88px;
+  height: 88px;
+  border-radius: 18px;
+}
+
+/* Top-bar links read as text with a gold underline on the current page, as on the old site;
+   the Contact button keeps its button styling. */
+body > header > nav li > a:not([class]) {
+  color: var(--color-text);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+body > header > nav li > a:not([class]):is(:hover, [aria-current='page']) {
+  border-bottom-color: var(--color-highlight);
+}
