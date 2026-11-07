@@ -46,7 +46,43 @@ test('normalize: maps discussions and drops archived public repos', () => {
   assert.equal(first.category, 'Ideas');
   assert.equal(first.upvotes, 9);
   assert.equal(first.comments, 3);
-  assert.deepEqual(n.publicRepos, ['kovirlabs/toril', 'kovirlabs/nu']);
+  assert.deepEqual(
+    n.publicRepos?.map((r) => r.fullName),
+    ['kovirlabs/toril', 'kovirlabs/nu'],
+  );
+});
+
+test('normalize: public repos carry display facts', () => {
+  const { aliases } = buildQuery(['kovirlabs/toril', 'kovirlabs/nu']);
+  const n = normalize(fixture('graphql-ok'), aliases);
+  assert.deepEqual(n.publicRepos?.[0], {
+    fullName: 'kovirlabs/toril',
+    url: 'https://github.com/kovirlabs/toril',
+    description: 'A small, fast desktop markdown editor.',
+    language: 'TypeScript',
+    pushedAt: '2026-10-20T10:00:00Z',
+    fork: false,
+  });
+  const nu = n.publicRepos?.[1];
+  assert.equal(nu?.description, null);
+  assert.equal(nu?.fork, true);
+});
+
+test('normalize: a private repo in the org list is never kept', () => {
+  const { aliases } = buildQuery(['kovirlabs/toril', 'kovirlabs/nu']);
+  const n = normalize(okWith((d) => (d.org.repositories.nodes[1].isPrivate = true)), aliases);
+  assert.deepEqual(
+    n.publicRepos?.map((r) => r.fullName),
+    ['kovirlabs/toril'],
+  );
+});
+
+test('buildQuery: the org block asks for the public repo display fields', () => {
+  const { query } = buildQuery(['kovirlabs/toril']);
+  assert.ok(query.includes('repositories(first: 100, privacy: PUBLIC)'));
+  for (const f of ['url', 'description', 'primaryLanguage { name }', 'pushedAt', 'isFork', 'isPrivate']) {
+    assert.ok(query.includes(f), f);
+  }
 });
 
 test('normalize: partial results sort NOT_FOUND into missing, other errors into failed', () => {

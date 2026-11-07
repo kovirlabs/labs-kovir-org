@@ -1,6 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import RepoList from '../../components/RepoList.astro';
+import { toRepoRows } from '../../lib/all-repos.ts';
+import { INFRA_REPOS } from '../../lib/catalog.ts';
+import { loadSnapshot } from '../../lib/snapshot.ts';
 import { getProjects } from '../../lib/project-data.ts';
 import { CATEGORY_LABEL, PLATFORM_LABEL } from '../../lib/labels.ts';
 import type { Support } from '../../lib/project-rules.ts';
@@ -13,6 +17,8 @@ const sections: { support: Support; title: string; note: string }[] = [
 ];
 const categories = [...new Set(projects.map((p) => p.view.category))];
 const platforms = [...new Set(projects.flatMap((p) => p.view.platforms))];
+const curated = Object.fromEntries(projects.map((p) => [p.view.repo, p.view.slug]));
+const repoRows = toRepoRows(loadSnapshot().publicRepos, curated, INFRA_REPOS);
 ---
 
 <Base title="Projects" description="Open software from Kovir Labs, grouped by how Kovir supports it.">
@@ -59,6 +65,19 @@ const platforms = [...new Set(projects.flatMap((p) => p.view.platforms))];
     }
     <p id="no-match" class="muted" hidden>No projects match those filters.</p>
   </section>
+
+  {
+    repoRows.length > 0 && (
+      <section class="section container" aria-labelledby="all-repos">
+        <h2 id="all-repos">All repositories</h2>
+        <p class="muted">
+          Every public repository in the <a href="https://github.com/kovirlabs">kovirlabs</a> GitHub
+          organization. Repositories without a project page haven't been reviewed by the Kovir team.
+        </p>
+        <RepoList rows={repoRows} />
+      </section>
+    )
+  }
 </Base>
 
 <script>

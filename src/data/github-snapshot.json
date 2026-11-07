@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-25T20:03:41.203Z",
+  "fetchedAt": "2026-11-07T16:01:25.022Z",
   "repos": {
     "kovirlabs/first-principles-code": {
       "fullName": "kovirlabs/first-principles-code",
@@ -21,7 +21,7 @@
         "teaching",
         "tkinter"
       ],
-      "pushedAt": "2026-07-21T16:32:27Z",
+      "pushedAt": "2026-11-07T01:19:31Z",
       "archived": false,
       "hasContributing": false,
       "hasCodeOfConduct": false,
@@ -37,7 +37,7 @@
       "fullName": "kovirlabs/nu",
       "url": "https://github.com/kovirlabs/nu",
       "description": "The continuation of the original Mu Editor, to support those who love and depend on it. ",
-      "stars": 0,
+      "stars": 2,
       "license": "GPL-3.0",
       "topics": [],
       "pushedAt": "2026-10-20T22:41:17Z",
@@ -87,7 +87,7 @@
         "version-control",
         "windows"
       ],
-      "pushedAt": "2026-10-21T04:15:04Z",
+      "pushedAt": "2026-11-07T15:58:17Z",
       "archived": false,
       "hasContributing": true,
       "hasCodeOfConduct": true,
@@ -140,7 +140,7 @@
       "fullName": "kovirlabs/toril",
       "url": "https://github.com/kovirlabs/toril",
       "description": "A small, fast desktop WYSIWYG markdown editor for plain .md files — inline editing built on Tauri, Rust, and Milkdown. Obsidian-vault compatible.",
-      "stars": 7,
+      "stars": 8,
       "license": "Apache-2.0",
       "topics": [
         "commonmark",
@@ -156,7 +156,7 @@
         "typescript",
         "wysiwyg"
       ],
-      "pushedAt": "2026-10-16T00:13:00Z",
+      "pushedAt": "2026-11-03T23:03:59Z",
       "archived": false,
       "hasContributing": true,
       "hasCodeOfConduct": true,
@@ -240,13 +240,133 @@
   },
   "ideas": [],
   "publicRepos": [
-    "kovirlabs/toril",
-    "kovirlabs/first-principles-code",
-    "kovirlabs/simpl-css",
-    "kovirlabs/nu",
-    "kovirlabs/json-editor-web",
-    "kovirlabs/sonome",
-    "kovirlabs/setup-hhtos",
-    "kovirlabs/tenajlo"
+    {
+      "fullName": "kovirlabs/toril",
+      "url": "https://github.com/kovirlabs/toril",
+      "description": "A small, fast desktop WYSIWYG markdown editor for plain .md files — inline editing built on Tauri, Rust, and Milkdown. Obsidian-vault compatible.",
+      "language": "TypeScript",
+      "pushedAt": "2026-11-03T23:03:59Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/first-principles-code",
+      "url": "https://github.com/kovirlabs/first-principles-code",
+      "description": "Teaching template that helps engineers solve real problems in Python instead of proprietary technical programming languages. 11 documented engineering domain classes, a unit-aware Beam dataclass with Pint, solve_ivp/curve_fit examples, a tkinter console GUI, and a pytest suite.",
+      "language": "Python",
+      "pushedAt": "2026-11-07T01:19:31Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/tagbrush",
+      "url": "https://github.com/kovirlabs/tagbrush",
+      "description": "Classless CSS for semantic HTML and Markdown. One <link> gives you page layout, dark mode, forms, code highlighting and accessible colors. About 7 KB, no build, no classes, ready for AI coding agents.",
+      "language": "HTML",
+      "pushedAt": "2026-11-07T14:10:36Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/nu",
+      "url": "https://github.com/kovirlabs/nu",
+      "description": "The continuation of the original Mu Editor, to support those who love and depend on it. ",
+      "language": "Python",
+      "pushedAt": "2026-10-20T22:41:17Z",
+      "fork": true
+    },
+    {
+      "fullName": "kovirlabs/json-editor-web",
+      "url": "https://github.com/kovirlabs/json-editor-web",
+      "description": null,
+      "language": "JavaScript",
+      "pushedAt": "2026-06-20T13:01:02Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/sonome",
+      "url": "https://github.com/kovirlabs/sonome",
+      "description": null,
+      "language": "Python",
+      "pushedAt": "2026-07-10T23:04:52Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/setup-hhtos",
+      "url": "https://github.com/kovirlabs/setup-hhtos",
+      "description": "Setup: Hermes Agent, Hindsight Memory, Telegram Gateway, Obsidian Vault, Syncthing",
+      "language": null,
+      "pushedAt": "2026-07-26T16:32:51Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/tenajlo",
+      "url": "https://github.com/kovirlabs/tenajlo",
+      "description": "Desktop Git client for self-hosted Forgejo: clone, commit, push and branch without the command line. Windows-first, Git LFS built in. Tauri + Rust + React.",
+      "language": "Rust",
+      "pushedAt": "2026-11-07T15:58:17Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/labs-kovir-org",
+      "url": "https://github.com/kovirlabs/labs-kovir-org",
+      "description": null,
+      "language": "TypeScript",
+      "pushedAt": "2026-11-07T15:59:08Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/community",
+      "url": "https://github.com/kovirlabs/community",
+      "description": "Suggest software for mission-driven work. Ideas, Q&A and show-and-tell for Kovir Labs.",
+      "language": "Shell",
+      "pushedAt": "2026-10-25T20:34:00Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/tagaction",
+      "url": "https://github.com/kovirlabs/tagaction",
+      "description": null,
+      "language": "JavaScript",
+      "pushedAt": "2026-11-07T14:10:12Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/tagcheck",
+      "url": "https://github.com/kovirlabs/tagcheck",
+      "description": null,
+      "language": "JavaScript",
+      "pushedAt": "2026-11-07T14:07:12Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/tagkit",
+      "url": "https://github.com/kovirlabs/tagkit",
+      "description": null,
+      "language": "HTML",
+      "pushedAt": "2026-11-07T14:09:57Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/tagstack",
+      "url": "https://github.com/kovirlabs/tagstack",
+      "description": null,
+      "language": "HTML",
+      "pushedAt": "2026-11-07T14:11:30Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/tagkit-jekyll",
+      "url": "https://github.com/kovirlabs/tagkit-jekyll",
+      "description": null,
+      "language": "HTML",
+      "pushedAt": "2026-11-07T13:18:10Z",
+      "fork": false
+    },
+    {
+      "fullName": "kovirlabs/tagkit-wordpress",
+      "url": "https://github.com/kovirlabs/tagkit-wordpress",
+      "description": null,
+      "language": "CSS",
+      "pushedAt": "2026-11-07T14:04:16Z",
+      "fork": false
+    }
   ]
 }

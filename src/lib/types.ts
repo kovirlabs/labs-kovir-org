@@ -32,11 +32,21 @@ export type IdeaFacts = {
   closed: boolean;
 };
 
+/** A public, non-archived repo in the org, as shown in the "All repositories" list. */
+export type PublicRepo = {
+  fullName: string;
+  url: string;
+  description: string | null;
+  language: string | null;
+  pushedAt: string;
+  fork: boolean;
+};
+
 export type Snapshot = {
   fetchedAt: string | null;
   repos: Record<string, RepoFacts>;
   ideas: IdeaFacts[];
-  publicRepos: string[];
+  publicRepos: PublicRepo[];
 };
 
 export type Normalized = {
@@ -44,7 +54,7 @@ export type Normalized = {
   /** null when the forum block could not be read. */
   ideas: IdeaFacts[] | null;
   /** null when the org block could not be read. Archived repos are excluded. */
-  publicRepos: string[] | null;
+  publicRepos: PublicRepo[] | null;
   /** Curated repos GitHub reported as NOT_FOUND, or that are private or renamed. */
   missing: string[];
   /** Curated repos that errored for any other reason. */
