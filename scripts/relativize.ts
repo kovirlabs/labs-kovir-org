@@ -17,3 +17,17 @@ export function relativizeHtml(html: string, depth: number): string {
 export function relativizeCss(css: string): string {
   return css.replace(/url\(\/_astro\//g, 'url(./');
 }
+
+/** Root-relative URLs still present (any quoting, srcset entries, CSS url()). tagcheck.ts
+ *  refuses to run if a page has any, since TagCheck would then measure it without them. */
+export function rootRelativeUrls(text: string): string[] {
+  const found: string[] = [];
+  const attr = /\b(?:href|src|srcset|poster)=(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g;
+  for (const m of text.matchAll(attr)) {
+    const value = m[1] ?? m[2] ?? m[3];
+    const urls = m[0].startsWith('srcset') ? value.split(',').map((u) => u.trim().split(/\s+/)[0]) : [value];
+    if (urls.some((u) => /^\/(?!\/)/.test(u))) found.push(m[0]);
+  }
+  for (const m of text.matchAll(/url\(\s*(['"]?)\/(?!\/)[^)]*\)/g)) found.push(m[0]);
+  return found;
+}

@@ -15,7 +15,7 @@
     "test": "node --test 'src/**/*.test.ts' 'scripts/**/*.test.ts'",
     "refresh": "node scripts/refresh-github.ts",
     "catalog": "node scripts/check-catalog.ts",
-    "tagcheck": "node scripts/tagcheck.ts"
+    "tagcheck": "node scripts/tagcheck.ts && node scripts/browser-probe.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

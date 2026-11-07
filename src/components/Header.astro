@@ -1,6 +1,9 @@
 ---
-// The top bar's <nav>. TagBrush lays it out as a row; TagAction marks the current page with
-// aria-current, so no path logic is needed here. Base.astro supplies the surrounding <header>.
+// The top bar's <nav>; TagBrush lays it out as a row and Base.astro supplies the <header>.
+// The link for the current section is marked at build time, so /projects/<slug> marks
+// Projects and the mark works without JavaScript; TagAction leaves pre-marked links alone.
+const path = Astro.url.pathname;
+const current = (href: string) => (path === href || path.startsWith(`${href}/`) ? 'page' : undefined);
 ---
 
 <nav aria-label="Primary">
@@ -11,9 +14,9 @@
     </picture>
   </a>
   <ul>
-    <li><a href="/projects">Projects</a></li>
-    <li><a href="/ideas">Ideas</a></li>
-    <li><a href="/about">About</a></li>
-    <li><a class="button" href="/contact">Contact</a></li>
+    <li><a href="/projects" aria-current={current('/projects')}>Projects</a></li>
+    <li><a href="/ideas" aria-current={current('/ideas')}>Ideas</a></li>
+    <li><a href="/about" aria-current={current('/about')}>About</a></li>
+    <li><a class="button" href="/contact" aria-current={current('/contact')}>Contact</a></li>
   </ul>
 </nav>

@@ -2,11 +2,12 @@
 // fails). TagCheck opens pages as file:// URLs, so it checks a temporary copy of dist/ whose
 // root-relative URLs are made relative (see relativize.ts); otherwise the browser checks would
 // measure pages without their stylesheet. Extra arguments (e.g. --json) pass through.
+// TagCheck can't run page scripts from file://; scripts/browser-probe.ts covers that.
 import { cpSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, relative, sep } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { relativizeCss, relativizeHtml } from './relativize.ts';
+import { relativizeCss, relativizeHtml, rootRelativeUrls } from './relativize.ts';
 
 const root = new URL('..', import.meta.url).pathname;
 const dist = join(root, 'dist');
@@ -28,6 +29,12 @@ try {
       writeFileSync(file, relativizeCss(readFileSync(file, 'utf8')));
     }
   }
+  // If any root-relative URL survived, TagCheck would measure that page without it.
+  const left = walk(copy)
+    .filter((f) => f.endsWith('.html') || f.endsWith('.css'))
+    .flatMap((f) => rootRelativeUrls(readFileSync(f, 'utf8')).map((u) => `${relative(copy, f)}: ${u}`));
+  if (left.length) throw new Error(`root-relative URLs left after relativizing:\n${left.join('\n')}`);
+
   const bin = join(root, 'node_modules/.bin/tagcheck');
   const run = spawnSync(bin, [copy, '--strict', '--browser', ...process.argv.slice(2)], { encoding: 'utf8' });
   // Report paths as dist/… rather than the temporary folder.

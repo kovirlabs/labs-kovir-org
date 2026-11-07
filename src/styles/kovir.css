@@ -22,6 +22,8 @@
   --color-highlight: light-dark(#8d440f, #dfad05);
   /* Links in Kovir gold (dark) and rust (light), as on the old site; both pass 4.5:1. */
   --color-link: var(--color-highlight);
+  /* Form error text: TagBrush's default red is 4.17:1 on eggshell; these pass 4.5:1. */
+  --color-error: light-dark(#b91c1c, #f87171);
   --font-family-heading: 'Manrope', system-ui, sans-serif;
   --font-family-base: 'Inter', system-ui, sans-serif;
   --font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -37,22 +39,21 @@ body > header > nav > a:first-child img {
   height: 2.3rem;
 }
 
-/* The skip link is visually hidden until it receives keyboard focus. */
-body > a[href='#main']:focus {
-  position: fixed;
+/* The skip link sits above the page until it receives keyboard focus. (TagBrush's
+   .visually-hidden uses !important in a layer, so a :focus override can't undo it.) */
+body > a[href='#main'] {
+  position: absolute;
   top: 0.75rem;
   left: 0.75rem;
   z-index: 10;
-  width: auto;
-  height: auto;
-  clip: auto;
-  clip-path: none;
-  overflow: visible;
-  white-space: normal;
   padding: 0.5rem 1rem;
   border-radius: var(--border-radius);
   background: var(--color-primary);
   color: #fff;
+  transform: translateY(-200%);
+}
+body > a[href='#main']:focus {
+  transform: none;
 }
 
 /* Hero: the heading's second line keeps Kovir's accent color. */
