@@ -52,3 +52,83 @@ body > a[href='#main']:focus {
   background: var(--color-primary);
   color: #fff;
 }
+
+/* Hero: the heading's second line keeps Kovir's accent color. */
+body > header hgroup h1 em {
+  font-style: normal;
+  color: var(--color-highlight);
+}
+
+/* Project cards: the icon (or the first-letter monogram when a project has none) sits beside
+   the title, as on the old cards. */
+main article[data-category] > header {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+main article[data-category] > header > :is(img, span) {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  object-fit: contain;
+}
+main article[data-category] > header > span {
+  display: grid;
+  place-items: center;
+  background: #2a5657;
+  color: #f1eee9;
+  font: 700 1.6rem/1 var(--font-family-heading);
+}
+#from-the-lab article[data-category] > header > :is(img, span) {
+  width: 44px;
+  height: 44px;
+}
+
+/* The whole card opens the project: the title link stretches over it, and the card shows the
+   focus ring instead of the link. */
+main article[data-category] {
+  position: relative;
+}
+main article[data-category] h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+main article[data-category] h3 a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--border-radius);
+}
+main article[data-category] h3 a:focus-visible {
+  outline: none;
+}
+main article[data-category]:has(h3 a:focus-visible) {
+  outline: 3px solid #dfad05;
+  outline-offset: 2px;
+}
+
+/* Support badges in Kovir colors. The CSP forbids TagBrush's inline --tone override, so the
+   official teal-with-gold and the outlined incubating badge are set here. */
+mark[data-tone='success'] {
+  background: #3a787a;
+  border: 1px solid #dfad05;
+  color: #fff;
+}
+mark[data-tone='info'] {
+  background: transparent;
+  border: 1px solid var(--color-highlight);
+  color: var(--color-highlight);
+}
+
+/* The teal band behind "How ideas become software" and "Part of Kovir LLC", full width as on
+   the old site. Muted text and gold are lightened on dark teal to keep 4.5:1 contrast. */
+#how-it-works,
+#kovir-band {
+  --color-text-muted: light-dark(#5c5852, #dcd6cc);
+  --color-highlight: light-dark(#8d440f, #f3c93a);
+  background: light-dark(#e4ded3, #2a5657);
+  box-shadow: 0 0 0 100vmax light-dark(#e4ded3, #2a5657);
+  clip-path: inset(0 -100vmax);
+  padding-block: 2.5rem;
+}
