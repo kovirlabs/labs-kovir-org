@@ -56,8 +56,11 @@ const image = ogImage
     {jsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <Header />
+    <a class="visually-hidden" href="#main">Skip to content</a>
+    <header>
+      <Header />
+      <slot name="hero" />
+    </header>
     <main id="main">
       <slot />
     </main>
@@ -68,10 +71,3 @@ const image = ogImage
   </body>
 </html>
 
-<style>
-  .skip-link {
-    position: absolute; left: 1rem; top: -3rem; z-index: 10;
-    background: var(--action); color: var(--action-text); padding: 0.5rem 1rem; border-radius: var(--radius);
-  }
-  .skip-link:focus { top: 1rem; }
-</style>

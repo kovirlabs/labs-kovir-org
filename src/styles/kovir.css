@@ -27,3 +27,28 @@
   /* The hero sits on a soft tint toward Kovir's dark teal. */
   --hero-background: color-mix(in srgb, var(--color-background) 82%, #2a5657);
 }
+
+/* The logo is an image link, not the usual <strong> site name, so give it the bar's height. */
+body > header > nav > a:first-child img {
+  display: block;
+  width: auto;
+  height: 2.3rem;
+}
+
+/* The skip link is visually hidden until it receives keyboard focus. */
+body > a[href='#main']:focus {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10;
+  width: auto;
+  height: auto;
+  clip: auto;
+  clip-path: none;
+  overflow: visible;
+  white-space: normal;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  background: var(--color-primary);
+  color: #fff;
+}
