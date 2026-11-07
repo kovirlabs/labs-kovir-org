@@ -22,55 +22,51 @@ const repoRows = toRepoRows(loadSnapshot().publicRepos, curated, INFRA_REPOS);
 ---
 
 <Base title="Projects" description="Open software from Kovir Labs, grouped by how Kovir supports it.">
-  <section class="section container">
+  <hgroup>
     <h1>Projects</h1>
-    <p class="lede">
+    <p>
       Everything Kovir Labs builds is open source on <a href="https://github.com/kovirlabs">GitHub</a>.
       Projects are grouped by how much support Kovir commits to them.
     </p>
+  </hgroup>
 
-    <form id="project-filter" class="filters" hidden>
-      <label>Category
-        <select name="category">
-          <option value="">All</option>
-          {categories.map((c) => <option value={c}>{CATEGORY_LABEL[c]}</option>)}
-        </select>
-      </label>
-      <label>Platform
-        <select name="platform">
-          <option value="">All</option>
-          {platforms.map((p) => <option value={p}>{PLATFORM_LABEL[p]}</option>)}
-        </select>
-      </label>
-      <p class="muted count" aria-live="polite"></p>
-    </form>
+  <search id="project-filter" hidden>
+    <label for="filter-category">Category</label>
+    <select id="filter-category" name="category">
+      <option value="">All categories</option>
+      {categories.map((c) => <option value={c}>{CATEGORY_LABEL[c]}</option>)}
+    </select>
+    <label for="filter-platform">Platform</label>
+    <select id="filter-platform" name="platform">
+      <option value="">All platforms</option>
+      {platforms.map((p) => <option value={p}>{PLATFORM_LABEL[p]}</option>)}
+    </select>
+    <output for="filter-category filter-platform" aria-live="polite"></output>
+  </search>
 
-    {
-      sections.map((s) => {
-        const list = projects.filter((p) => p.view.support === s.support);
-        return (
-          list.length > 0 && (
-            <section class="group" data-group>
-              <h2>{s.title}</h2>
-              <p class="muted">{s.note}</p>
-              <div class="grid">
-                {list.map((p) => (
-                  <ProjectCard view={p.view} icon={p.entry.data.icon} />
-                ))}
-              </div>
-            </section>
-          )
-        );
-      })
-    }
-    <p id="no-match" class="muted" hidden>No projects match those filters.</p>
-  </section>
+  {
+    sections.map((s) => {
+      const list = projects.filter((p) => p.view.support === s.support);
+      return (
+        list.length > 0 && (
+          <section aria-labelledby={`group-${s.support}`}>
+            <h2 id={`group-${s.support}`}>{s.title}</h2>
+            <p>{s.note}</p>
+            {list.map((p) => (
+              <ProjectCard view={p.view} icon={p.entry.data.icon} />
+            ))}
+          </section>
+        )
+      );
+    })
+  }
+  <p id="no-match" hidden>No projects match those filters.</p>
 
   {
     repoRows.length > 0 && (
-      <section class="section container" aria-labelledby="all-repos">
+      <section id="all-repositories" aria-labelledby="all-repos">
         <h2 id="all-repos">All repositories</h2>
-        <p class="muted">
+        <p>
           Every public repository in the <a href="https://github.com/kovirlabs">kovirlabs</a> GitHub
           organization. Repositories without a project page haven't been reviewed by the Kovir team.
         </p>
@@ -81,14 +77,5 @@ const repoRows = toRepoRows(loadSnapshot().publicRepos, curated, INFRA_REPOS);
 </Base>
 
 <script>
-  import '../../scripts/project-filter.ts';
+  import '../../scripts/site.ts';
 </script>
-
-<style>
-  .filters { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: end; margin: 1.5rem 0 0.5rem; }
-  .filters label { display: grid; gap: 0.3rem; font: 500 0.9rem/1.2 var(--font-head); }
-  select { font: inherit; font-family: var(--font-body); padding: 0.5rem 0.6rem; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text); min-width: 11rem; }
-  .count { margin: 0; }
-  .group { margin-top: 2.5rem; }
-  .group > p { margin-top: -0.25rem; }
-</style>

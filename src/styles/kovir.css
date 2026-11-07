@@ -121,14 +121,29 @@ mark[data-tone='info'] {
   color: var(--color-highlight);
 }
 
-/* The teal band behind "How ideas become software" and "Part of Kovir LLC", full width as on
+/* The teal band behind "How ideas become software", "Part of Kovir LLC" and a project's
+   "Get involved", full width as on
    the old site. Muted text and gold are lightened on dark teal to keep 4.5:1 contrast. */
 #how-it-works,
-#kovir-band {
+#kovir-band,
+#get-involved {
   --color-text-muted: light-dark(#5c5852, #dcd6cc);
   --color-highlight: light-dark(#8d440f, #f3c93a);
   background: light-dark(#e4ded3, #2a5657);
   box-shadow: 0 0 0 100vmax light-dark(#e4ded3, #2a5657);
   clip-path: inset(0 -100vmax);
   padding-block: 2.5rem;
+}
+
+/* A project page's icon sits beside its name. */
+#project > header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+#project > header > img {
+  flex: none;
+  width: 88px;
+  height: 88px;
+  border-radius: 18px;
 }
