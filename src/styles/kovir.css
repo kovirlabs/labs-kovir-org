@@ -1,35 +1,84 @@
 /* Kovir Labs theme for TagBrush.css. TagBrush styles the HTML; this file only sets Kovir's
    palette and fonts through TagBrush's documented variables, plus the few brand touches
    TagBrush can't express. No class selectors: rules target ids, structure and documented
-   attributes, so TagCheck stays clean. */
+   attributes, so TagCheck stays clean.
+
+   Labs is always dark: www.kovir.org's warm dark mode (kovirlabs/kovir-org,
+   tagstack/kovir-theme.css), with gold links and highlights as Labs' own accent. */
 
 /* Self-hosted fonts (the CSP allows no font CDN). */
 @import '@fontsource/inter/400.css';
 @import '@fontsource/inter/700.css';
 @import '@fontsource/manrope/500.css';
 @import '@fontsource/manrope/700.css';
+@import '@fontsource/manrope/800.css';
 @import '@fontsource/jetbrains-mono/400.css';
 
-/* Kovir palette, light / dark. The site follows the reader's color scheme. */
 :root {
+  /* One scheme: native controls, scrollbars and TagBrush's own light-dark() values go dark. */
+  color-scheme: dark;
+
+  /* Kovir accents. */
+  --kovir-teal-deep: #264f50; /* kovir.org's band teal; gold text on it meets AA */
+  --kovir-gold: #dfad05; /* fills: buttons, rules, focus ring */
+  --kovir-gold-dark: #c99c04;
+  --kovir-gold-text: #f2c744; /* gold lifted for text on deep teal */
+  --kovir-charcoal: #323232;
+  --kovir-shadow-color: rgb(0 0 0 / 0.45);
+
+  /* Colors: kovir.org's warm dark palette. */
   --color-primary: #3a787a;
-  --color-background: light-dark(#f1eee9, #232626);
-  --color-surface: light-dark(#ffffff, #2d3131);
-  --color-border: light-dark(#d6cfc3, #3e4444);
-  --color-text: light-dark(#323232, #f1eee9);
-  --color-heading: light-dark(#323232, #f1eee9);
-  --color-text-muted: light-dark(#5c5852, #bdb7ad);
-  --color-highlight: light-dark(#8d440f, #dfad05);
-  /* Links in Kovir gold (dark) and rust (light), as on the old site; both pass 4.5:1. */
-  --color-link: var(--color-highlight);
-  /* Form error text: TagBrush's default red is 4.17:1 on eggshell; these pass 4.5:1. */
-  --color-error: light-dark(#b91c1c, #f87171);
-  --font-family-heading: 'Manrope', system-ui, sans-serif;
+  --color-primary-hover: #316668;
+  --color-on-primary: #ffffff;
+  --color-background: #1b1916;
+  --color-surface: #282420;
+  --color-border: #3d3732;
+  --color-text: #eee9e2;
+  --color-heading: #f7f3ee;
+  --color-text-muted: #c6beb3;
+  /* Labs' accent: gold for highlights and links (kovir.org uses teal links). */
+  --color-highlight: var(--kovir-gold);
+  --color-link: var(--kovir-gold);
+  --color-link-hover: var(--kovir-gold-text);
+  --color-marker: var(--kovir-gold);
+  --focus-ring-color: var(--kovir-gold);
+  /* Form error text: TagBrush's default red fails 4.5:1 on some surfaces. */
+  --color-error: #f87171;
+
+  /* Type: Manrope headings over Inter text, on kovir.org's scale. */
+  --font-family-heading: 'Manrope', 'Inter', system-ui, sans-serif;
   --font-family-base: 'Inter', system-ui, sans-serif;
   --font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-size-base: 1.0625rem;
+  --font-size-sm: 0.9rem;
+  --font-size-h1: clamp(2.25rem, 5vw, 3.5rem);
+  --font-size-h2: clamp(1.85rem, 4vw, 2.75rem);
+  --font-size-h3: clamp(1.35rem, 2.5vw, 1.75rem);
+  --font-size-h4: 1.2rem;
+  --font-size-h5: 1.05rem;
+  --font-size-h6: 1rem;
+  --font-weight-heading: 800;
+  --line-height: 1.65;
+  --line-height-heading: 1.15;
+
+  /* Layout and shape, as on kovir.org. */
+  --container-max-width: 1200px;
+  --container-padding: clamp(1rem, 4vw, 2rem);
+  --grid-min-column: 16.25rem;
+  --grid-gap: 1.5rem;
   --border-radius: 10px;
-  /* The hero sits on a soft tint toward Kovir's dark teal. */
-  --hero-background: color-mix(in srgb, var(--color-background) 82%, #2a5657);
+  --card-radius: 18px;
+  --card-padding: 1.75rem;
+  --shadow: 0 10px 30px -12px var(--kovir-shadow-color);
+  --shadow-lg: 0 16px 40px -14px var(--kovir-shadow-color);
+  --button-padding: 0.85rem 1.6rem;
+  --button-radius: 10px;
+  --button-font-weight: 700;
+  --input-padding: 0.75rem 0.9rem;
+  --input-radius: 8px;
+
+  /* The hero sits on a soft tint toward Kovir's deep teal. */
+  --hero-background: color-mix(in srgb, var(--color-background) 80%, var(--kovir-teal-deep));
 }
 
 /* The logo is an image link, not the usual <strong> site name, so give it the bar's height. */
@@ -79,7 +128,7 @@ main article[data-category] > header > :is(img, span) {
 main article[data-category] > header > span {
   display: grid;
   place-items: center;
-  background: #2a5657;
+  background: var(--kovir-teal-deep);
   color: #f1eee9;
   font: 700 1.6rem/1 var(--font-family-heading);
 }
@@ -101,13 +150,13 @@ main article[data-category] h3 a::after {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: var(--border-radius);
+  border-radius: var(--card-radius);
 }
 main article[data-category] h3 a:focus-visible {
   outline: none;
 }
 main article[data-category]:has(h3 a:focus-visible) {
-  outline: 3px solid #dfad05;
+  outline: 3px solid var(--kovir-gold);
   outline-offset: 2px;
 }
 
@@ -115,7 +164,7 @@ main article[data-category]:has(h3 a:focus-visible) {
    official teal-with-gold and the outlined incubating badge are set here. */
 mark[data-tone='success'] {
   background: #3a787a;
-  border: 1px solid #dfad05;
+  border: 1px solid var(--kovir-gold);
   color: #fff;
 }
 /* A link inside a badge (the repository table's "Project page") takes the badge's text color. */
@@ -128,18 +177,28 @@ mark[data-tone='info'] {
   color: var(--color-highlight);
 }
 
-/* The teal band behind "How ideas become software", "Part of Kovir LLC" and a project's
-   "Get involved", full width as on
-   the old site. Muted text and gold are lightened on dark teal to keep 4.5:1 contrast. */
+/* The deep-teal band behind "How ideas become software", "Part of Kovir LLC" and a project's
+   "Get involved", full width, as kovir.org's data-theme="dark" bands: white text, lifted gold
+   links and gold buttons. */
 #how-it-works,
 #kovir-band,
 #get-involved {
-  --color-text-muted: light-dark(#5c5852, #dcd6cc);
-  --color-highlight: light-dark(#8d440f, #f3c93a);
-  /* --color-link is resolved at :root, so the lighter band gold has to be set again here. */
-  --color-link: light-dark(#8d440f, #f3c93a);
-  background: light-dark(#e4ded3, #2a5657);
-  box-shadow: 0 0 0 100vmax light-dark(#e4ded3, #2a5657);
+  --color-background: var(--kovir-teal-deep);
+  --color-surface: rgb(255 255 255 / 0.06);
+  --color-border: rgb(255 255 255 / 0.14);
+  --color-text: rgb(255 255 255 / 0.92);
+  --color-heading: #ffffff;
+  --color-text-muted: rgb(255 255 255 / 0.78);
+  --color-primary: var(--kovir-gold);
+  --color-primary-hover: var(--kovir-gold-dark);
+  --color-on-primary: var(--kovir-charcoal);
+  --color-highlight: var(--kovir-gold-text);
+  --color-link: var(--kovir-gold-text);
+  --color-link-hover: #ffffff;
+  --focus-ring-color: #ffffff;
+  color: var(--color-text);
+  background: var(--color-background);
+  box-shadow: 0 0 0 100vmax var(--color-background);
   clip-path: inset(0 -100vmax);
   padding-block: 2.5rem;
 }
@@ -157,8 +216,8 @@ mark[data-tone='info'] {
   border-radius: 18px;
 }
 
-/* Top-bar links read as text with a gold underline on the current page, as on the old site;
-   the Contact button keeps its button styling. */
+/* Top-bar links read as text with a gold underline on the current page; the Contact button
+   keeps its button styling. */
 body > header > nav li > a:not([class]) {
   color: var(--color-text);
   text-decoration: none;
