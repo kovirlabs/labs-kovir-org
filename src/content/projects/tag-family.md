@@ -10,7 +10,9 @@ repos:
   - kovirlabs/tagkit-wordpress
 tagline: Small tools for plain semantic HTML that looks finished, behaves well, and is checked for mistakes.
 audience: Anyone writing web pages by hand or with an AI agent, from documentation sites to small apps.
-support: lab
+support: official
+supportedSince: 2026-11-07
+featured: true
 status: beta
 order: 60
 category: library
@@ -40,5 +42,5 @@ to fix what it got wrong.
 This site is built on it. labs.kovir.org uses TagBrush.css for its styling and TagAction for its
 sortable tables and form messages, and every deploy runs TagCheck.
 
-The Tag family is an experiment from the lab. TagBrush.css is the most mature; the other tools
-are early, and their details may still change.
+Kovir Labs supports and maintains the Tag family. TagBrush.css is the most mature; the other tools
+are early, and their details may still change before 1.0.
