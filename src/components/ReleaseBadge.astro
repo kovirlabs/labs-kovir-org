@@ -1,0 +1,22 @@
+---
+import { formatUpdated } from '../lib/snapshot.ts';
+import type { ProjectView } from '../lib/projects.ts';
+
+interface Props { release: ProjectView['release']; link?: boolean }
+const { release, link = false } = Astro.props;
+---
+
+{
+  release ? (
+    <span class="release mono">
+      {link ? <a href={release.url}>{release.tag}</a> : release.tag}
+      <span class="muted"> · {formatUpdated(release.publishedAt)}</span>
+    </span>
+  ) : (
+    <span class="release muted">No release yet. Build from source.</span>
+  )
+}
+
+<style>
+  .release { font-size: 0.85rem; }
+</style>

@@ -1,0 +1,75 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getProjects } from '../../lib/project-data.ts';
+import { CATEGORY_LABEL, PLATFORM_LABEL } from '../../lib/labels.ts';
+import type { Support } from '../../lib/project-rules.ts';
+
+const projects = await getProjects();
+const sections: { support: Support; title: string; note: string }[] = [
+  { support: 'official', title: 'Officially supported', note: 'Adopted by the kovir.org team and maintained by Kovir Labs.' },
+  { support: 'incubating', title: 'Incubating', note: 'Being evaluated by the kovir.org team. No support promise yet.' },
+  { support: 'lab', title: 'From the lab', note: 'Experiments and side projects. Useful, honest about their rough edges.' },
+];
+const categories = [...new Set(projects.map((p) => p.view.category))];
+const platforms = [...new Set(projects.flatMap((p) => p.view.platforms))];
+---
+
+<Base title="Projects" description="Open software from Kovir Labs, grouped by how Kovir supports it.">
+  <section class="section container">
+    <h1>Projects</h1>
+    <p class="lede">
+      Everything Kovir Labs builds is open source on <a href="https://github.com/kovirlabs">GitHub</a>.
+      Projects are grouped by how much support Kovir commits to them.
+    </p>
+
+    <form id="project-filter" class="filters" hidden>
+      <label>Category
+        <select name="category">
+          <option value="">All</option>
+          {categories.map((c) => <option value={c}>{CATEGORY_LABEL[c]}</option>)}
+        </select>
+      </label>
+      <label>Platform
+        <select name="platform">
+          <option value="">All</option>
+          {platforms.map((p) => <option value={p}>{PLATFORM_LABEL[p]}</option>)}
+        </select>
+      </label>
+      <p class="muted count" aria-live="polite"></p>
+    </form>
+
+    {
+      sections.map((s) => {
+        const list = projects.filter((p) => p.view.support === s.support);
+        return (
+          list.length > 0 && (
+            <section class="group" data-group>
+              <h2>{s.title}</h2>
+              <p class="muted">{s.note}</p>
+              <div class="grid">
+                {list.map((p) => (
+                  <ProjectCard view={p.view} icon={p.entry.data.icon} />
+                ))}
+              </div>
+            </section>
+          )
+        );
+      })
+    }
+    <p id="no-match" class="muted" hidden>No projects match those filters.</p>
+  </section>
+</Base>
+
+<script>
+  import '../../scripts/project-filter.ts';
+</script>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: end; margin: 1.5rem 0 0.5rem; }
+  .filters label { display: grid; gap: 0.3rem; font: 500 0.9rem/1.2 var(--font-head); }
+  select { font: inherit; font-family: var(--font-body); padding: 0.5rem 0.6rem; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text); min-width: 11rem; }
+  .count { margin: 0; }
+  .group { margin-top: 2.5rem; }
+  .group > p { margin-top: -0.25rem; }
+</style>

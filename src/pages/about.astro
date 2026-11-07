@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import SupportBadge from '../components/SupportBadge.astro';
+import KovirBand from '../components/KovirBand.astro';
+---
+
+<Base title="About" description="Why Kovir Labs exists, how the kovir.org team decides what it builds, and how to reach us.">
+  <section class="section container prose-page">
+    <h1>About Kovir Labs</h1>
+    <p class="lede">
+      Kovir Labs is the development arm of Kovir LLC. We build open software that supports mission-driven
+      work at a meta scale: tools that many organizations can use, rather than custom builds for one.
+    </p>
+
+    <h2>Why it exists</h2>
+    <p>
+      Kovir LLC works alongside under-resourced, mission-driven organizations: nonprofits, aging-services
+      agencies, and the people who run them. Again and again, those organizations hit the same problems,
+      and the software that solves them is expensive, locked-in, or missing. Kovir Labs builds the missing
+      pieces once, in the open, so every organization can use them.
+    </p>
+
+    <h2>Who decides what we build</h2>
+    <p>
+      <strong>What Kovir Labs officially supports is decided by the kovir.org team.</strong> Anyone can
+      suggest an idea on the <a href="/ideas">community forum</a> or through the <a href="/contact?type=idea">contact form</a>.
+      The team reviews ideas regularly and favors needs that many organizations share. Decisions are
+      posted on the forum, so you can always see what was accepted, what's in progress, and what shipped.
+    </p>
+    <p>Every project carries one of three support levels:</p>
+    <dl class="levels">
+      <div class="card">
+        <dt><SupportBadge support="official" /></dt>
+        <dd>The kovir.org team has adopted this project. Kovir Labs supports and maintains it.</dd>
+      </div>
+      <div class="card">
+        <dt><SupportBadge support="incubating" /></dt>
+        <dd>Being evaluated by the kovir.org team. Useful today, but there's no support promise yet.</dd>
+      </div>
+      <div class="card">
+        <dt><SupportBadge support="lab" /></dt>
+        <dd>An experiment or side project. Use it, enjoy it, and expect rough edges.</dd>
+      </div>
+    </dl>
+
+    <h2>Who builds it</h2>
+    <p>
+      Kovir Labs is run by Evan Gress. Everything is open source, usually under the Apache-2.0 license,
+      and lives on <a href="https://github.com/kovirlabs">GitHub</a>. We prefer plain files, local-first
+      tools and no lock-in, so an organization can always walk away with its data.
+    </p>
+
+    <h2>Get in touch</h2>
+    <ul>
+      <li>Email <a href="mailto:info@kovir.org">info@kovir.org</a>.</li>
+      <li>Post an idea or a question on the <a href="https://github.com/kovirlabs/community/discussions">community forum</a>.</li>
+      <li>Use the <a href="/contact">contact form</a>, which needs no GitHub account.</li>
+    </ul>
+  </section>
+  <KovirBand />
+</Base>
+
+<style>
+  .prose-page { max-width: 48rem; }
+  .prose-page h2 { margin-top: 2.25rem; }
+  .levels { display: grid; gap: 0.75rem; margin: 1rem 0 0; }
+  .levels .card { display: grid; gap: 0.5rem; padding: 1rem 1.25rem; }
+  .levels dd { margin: 0; }
+  ul { padding-left: 1.2rem; }
+</style>

@@ -1,0 +1,40 @@
+---
+import { formatUpdated, loadSnapshot } from '../lib/snapshot.ts';
+
+const year = new Date().getFullYear();
+const updated = formatUpdated(loadSnapshot().fetchedAt);
+---
+
+<footer class="site-footer">
+  <div class="container cols">
+    <div>
+      <p class="about">
+        Kovir Labs is the development arm of <a href="https://www.kovir.org">Kovir LLC</a>, which helps
+        mission-driven organizations build capacity and increase impact.
+      </p>
+      <p class="muted small">© {year} Kovir LLC</p>
+    </div>
+    <ul aria-label="Footer">
+      <li><a href="/projects">Projects</a></li>
+      <li><a href="/ideas">Ideas</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="mailto:info@kovir.org">info@kovir.org</a></li>
+      <li><a href="https://github.com/kovirlabs">GitHub</a></li>
+      <li><a href="https://github.com/kovirlabs/community/discussions">Community forum</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+    </ul>
+  </div>
+  {updated && <p class="container muted small updated">Project data updated {updated}</p>}
+</footer>
+
+<style>
+  .site-footer { border-top: 1px solid var(--border); padding: 2.5rem 0 1.5rem; margin-top: 2rem; }
+  .cols { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+  @media (min-width: 48rem) { .cols { grid-template-columns: 1.4fr 1fr; } }
+  .about { max-width: 34rem; }
+  ul { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 1.5rem; }
+  li { margin-bottom: 0.4rem; }
+  .small { font-size: 0.875rem; }
+  .updated { margin-top: 1rem; margin-bottom: 0; }
+</style>

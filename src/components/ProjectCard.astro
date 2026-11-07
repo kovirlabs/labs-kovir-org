@@ -1,0 +1,55 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import SupportBadge from './SupportBadge.astro';
+import ReleaseBadge from './ReleaseBadge.astro';
+import PlatformList from './PlatformList.astro';
+import type { ProjectView } from '../lib/projects.ts';
+
+interface Props { view: ProjectView; icon?: ImageMetadata; compact?: boolean }
+const { view, icon, compact = false } = Astro.props;
+---
+
+<article
+  class:list={['card', 'project', { compact }]}
+  data-category={view.category}
+  data-platforms={view.platforms.join(' ')}
+>
+  <div class="head">
+    {
+      icon ? (
+        <Image src={icon} alt="" width={56} height={56} class="icon" />
+      ) : (
+        <span class="icon monogram" aria-hidden="true">{view.name.charAt(0)}</span>
+      )
+    }
+    <div>
+      <h3><a href={`/projects/${view.slug}`}>{view.name}</a></h3>
+      <SupportBadge support={view.support} />
+    </div>
+  </div>
+  <p>{view.tagline}</p>
+  {!compact && <p class="muted audience">For: {view.audience}</p>}
+  <div class="meta">
+    <ReleaseBadge release={view.release} />
+    <PlatformList platforms={view.platforms} />
+  </div>
+</article>
+
+<style>
+  .project { display: flex; flex-direction: column; gap: 0.75rem; position: relative; }
+  .project p { margin: 0; }
+  .head { display: flex; gap: 0.9rem; align-items: center; }
+  .head h3 { margin: 0 0 0.3rem; }
+  .head a { color: var(--text); text-decoration: none; }
+  /* The whole card is clickable through the title link. */
+  .head a::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius); }
+  .head a:focus-visible { outline: none; }
+  .project:has(a:focus-visible) { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .project:hover { border-color: var(--muted); }
+  .icon { width: 56px; height: 56px; border-radius: 12px; flex: none; object-fit: contain; }
+  .monogram { display: grid; place-items: center; background: var(--teal-dark); color: var(--eggshell); font: 700 1.6rem/1 var(--font-head); }
+  .audience { font-size: 0.92rem; }
+  .meta { display: flex; flex-direction: column; gap: 0.6rem; margin-top: auto; }
+  .compact .icon { width: 44px; height: 44px; }
+</style>

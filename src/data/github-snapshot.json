@@ -1,0 +1,252 @@
+{
+  "fetchedAt": "2026-10-25T20:03:41.203Z",
+  "repos": {
+    "kovirlabs/first-principles-code": {
+      "fullName": "kovirlabs/first-principles-code",
+      "url": "https://github.com/kovirlabs/first-principles-code",
+      "description": "Teaching template that helps engineers solve real problems in Python instead of proprietary technical programming languages. 11 documented engineering domain classes, a unit-aware Beam dataclass with Pint, solve_ivp/curve_fit examples, a tkinter console GUI, and a pytest suite.",
+      "stars": 0,
+      "license": "Apache-2.0",
+      "topics": [
+        "education",
+        "engineering",
+        "matlab-alternative",
+        "matplotlib",
+        "numpy",
+        "pint",
+        "pytest",
+        "python",
+        "scientific-computing",
+        "scipy",
+        "teaching",
+        "tkinter"
+      ],
+      "pushedAt": "2026-07-21T16:32:27Z",
+      "archived": false,
+      "hasContributing": false,
+      "hasCodeOfConduct": false,
+      "hasSecurityPolicy": false,
+      "latestRelease": {
+        "tag": "v0.1.0",
+        "publishedAt": "2026-05-28T02:23:17Z",
+        "url": "https://github.com/kovirlabs/first-principles-code/releases/tag/v0.1.0",
+        "assets": []
+      }
+    },
+    "kovirlabs/nu": {
+      "fullName": "kovirlabs/nu",
+      "url": "https://github.com/kovirlabs/nu",
+      "description": "The continuation of the original Mu Editor, to support those who love and depend on it. ",
+      "stars": 0,
+      "license": "GPL-3.0",
+      "topics": [],
+      "pushedAt": "2026-10-20T22:41:17Z",
+      "archived": false,
+      "hasContributing": true,
+      "hasCodeOfConduct": true,
+      "hasSecurityPolicy": false,
+      "latestRelease": null
+    },
+    "kovirlabs/sonome": {
+      "fullName": "kovirlabs/sonome",
+      "url": "https://github.com/kovirlabs/sonome",
+      "description": null,
+      "stars": 0,
+      "license": "Apache-2.0",
+      "topics": [],
+      "pushedAt": "2026-07-10T23:04:52Z",
+      "archived": false,
+      "hasContributing": false,
+      "hasCodeOfConduct": false,
+      "hasSecurityPolicy": false,
+      "latestRelease": null
+    },
+    "kovirlabs/tenajlo": {
+      "fullName": "kovirlabs/tenajlo",
+      "url": "https://github.com/kovirlabs/tenajlo",
+      "description": "Desktop Git client for self-hosted Forgejo: clone, commit, push and branch without the command line. Windows-first, Git LFS built in. Tauri + Rust + React.",
+      "stars": 0,
+      "license": "Apache-2.0",
+      "topics": [
+        "cad",
+        "desktop-app",
+        "forgejo",
+        "git",
+        "git-client",
+        "git-gui",
+        "git-lfs",
+        "gitea",
+        "github-desktop-alternative",
+        "plc",
+        "react",
+        "rust",
+        "self-hosted",
+        "ssh",
+        "tauri",
+        "typescript",
+        "version-control",
+        "windows"
+      ],
+      "pushedAt": "2026-10-21T04:15:04Z",
+      "archived": false,
+      "hasContributing": true,
+      "hasCodeOfConduct": true,
+      "hasSecurityPolicy": true,
+      "latestRelease": {
+        "tag": "v1.2.0",
+        "publishedAt": "2026-10-19T12:36:02Z",
+        "url": "https://github.com/kovirlabs/tenajlo/releases/tag/v1.2.0",
+        "assets": [
+          {
+            "name": "Tenajlo_1.2.0_aarch64.dmg",
+            "url": "https://github.com/kovirlabs/tenajlo/releases/download/v1.2.0/Tenajlo_1.2.0_aarch64.dmg"
+          },
+          {
+            "name": "Tenajlo_1.2.0_amd64.deb",
+            "url": "https://github.com/kovirlabs/tenajlo/releases/download/v1.2.0/Tenajlo_1.2.0_amd64.deb"
+          },
+          {
+            "name": "Tenajlo_1.2.0_aarch64.app.tar.gz",
+            "url": "https://github.com/kovirlabs/tenajlo/releases/download/v1.2.0/Tenajlo_1.2.0_aarch64.app.tar.gz"
+          },
+          {
+            "name": "Tenajlo_1.2.0_amd64.deb.sig",
+            "url": "https://github.com/kovirlabs/tenajlo/releases/download/v1.2.0/Tenajlo_1.2.0_amd64.deb.sig"
+          },
+          {
+            "name": "Tenajlo_1.2.0_aarch64.app.tar.gz.sig",
+            "url": "https://github.com/kovirlabs/tenajlo/releases/download/v1.2.0/Tenajlo_1.2.0_aarch64.app.tar.gz.sig"
+          },
+          {
+            "name": "Tenajlo_1.2.0_x64-setup.exe",
+            "url": "https://github.com/kovirlabs/tenajlo/releases/download/v1.2.0/Tenajlo_1.2.0_x64-setup.exe"
+          },
+          {
+            "name": "Tenajlo_1.2.0_x64-setup.exe.sig",
+            "url": "https://github.com/kovirlabs/tenajlo/releases/download/v1.2.0/Tenajlo_1.2.0_x64-setup.exe.sig"
+          },
+          {
+            "name": "latest.json",
+            "url": "https://github.com/kovirlabs/tenajlo/releases/download/v1.2.0/latest.json"
+          },
+          {
+            "name": "THIRD_PARTY_LICENSES.html",
+            "url": "https://github.com/kovirlabs/tenajlo/releases/download/v1.2.0/THIRD_PARTY_LICENSES.html"
+          }
+        ]
+      }
+    },
+    "kovirlabs/toril": {
+      "fullName": "kovirlabs/toril",
+      "url": "https://github.com/kovirlabs/toril",
+      "description": "A small, fast desktop WYSIWYG markdown editor for plain .md files — inline editing built on Tauri, Rust, and Milkdown. Obsidian-vault compatible.",
+      "stars": 7,
+      "license": "Apache-2.0",
+      "topics": [
+        "commonmark",
+        "desktop-app",
+        "markdown",
+        "markdown-editor",
+        "milkdown",
+        "notes",
+        "obsidian",
+        "prosemirror",
+        "rust",
+        "tauri",
+        "typescript",
+        "wysiwyg"
+      ],
+      "pushedAt": "2026-10-16T00:13:00Z",
+      "archived": false,
+      "hasContributing": true,
+      "hasCodeOfConduct": true,
+      "hasSecurityPolicy": true,
+      "latestRelease": {
+        "tag": "v1.1.1",
+        "publishedAt": "2026-10-16T00:18:10Z",
+        "url": "https://github.com/kovirlabs/toril/releases/tag/v1.1.1",
+        "assets": [
+          {
+            "name": "Toril_1.1.1_aarch64.dmg",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_aarch64.dmg"
+          },
+          {
+            "name": "Toril_aarch64.app.tar.gz",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_aarch64.app.tar.gz"
+          },
+          {
+            "name": "Toril_aarch64.app.tar.gz.sig",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_aarch64.app.tar.gz.sig"
+          },
+          {
+            "name": "Toril_1.1.1_x64.dmg",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_x64.dmg"
+          },
+          {
+            "name": "Toril_x64.app.tar.gz",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_x64.app.tar.gz"
+          },
+          {
+            "name": "Toril_x64.app.tar.gz.sig",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_x64.app.tar.gz.sig"
+          },
+          {
+            "name": "Toril_1.1.1_amd64.deb",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_amd64.deb"
+          },
+          {
+            "name": "Toril_1.1.1_amd64.deb.sig",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_amd64.deb.sig"
+          },
+          {
+            "name": "Toril-1.1.1-1.x86_64.rpm",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril-1.1.1-1.x86_64.rpm"
+          },
+          {
+            "name": "Toril-1.1.1-1.x86_64.rpm.sig",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril-1.1.1-1.x86_64.rpm.sig"
+          },
+          {
+            "name": "Toril_1.1.1_amd64.AppImage",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_amd64.AppImage"
+          },
+          {
+            "name": "Toril_1.1.1_amd64.AppImage.sig",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_amd64.AppImage.sig"
+          },
+          {
+            "name": "Toril_1.1.1_x64_en-US.msi",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_x64_en-US.msi"
+          },
+          {
+            "name": "Toril_1.1.1_x64_en-US.msi.sig",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_x64_en-US.msi.sig"
+          },
+          {
+            "name": "Toril_1.1.1_x64-setup.exe",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_x64-setup.exe"
+          },
+          {
+            "name": "Toril_1.1.1_x64-setup.exe.sig",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/Toril_1.1.1_x64-setup.exe.sig"
+          },
+          {
+            "name": "latest.json",
+            "url": "https://github.com/kovirlabs/toril/releases/download/v1.1.1/latest.json"
+          }
+        ]
+      }
+    }
+  },
+  "ideas": [],
+  "publicRepos": [
+    "kovirlabs/toril",
+    "kovirlabs/first-principles-code",
+    "kovirlabs/simpl-css",
+    "kovirlabs/nu",
+    "kovirlabs/json-editor-web",
+    "kovirlabs/sonome",
+    "kovirlabs/setup-hhtos",
+    "kovirlabs/tenajlo"
+  ]
+}

@@ -1,0 +1,139 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SupportBadge from '../../components/SupportBadge.astro';
+import ReleaseBadge from '../../components/ReleaseBadge.astro';
+import PlatformList from '../../components/PlatformList.astro';
+import DownloadButtons from '../../components/DownloadButtons.astro';
+import { getProjects, type Project } from '../../lib/project-data.ts';
+import { CATEGORY_LABEL, PLATFORM_LABEL, STATUS_LABEL } from '../../lib/labels.ts';
+import { FORUM_REPO } from '../../lib/github-query.ts';
+
+export async function getStaticPaths() {
+  return (await getProjects()).map((p) => ({ params: { slug: p.view.slug }, props: p }));
+}
+
+const { view, entry } = Astro.props as Project;
+const { icon, screenshots } = entry.data;
+const { Content } = await render(entry);
+const forum = `https://github.com/${FORUM_REPO}/discussions`;
+const supportNote = {
+  official: 'The kovir.org team has adopted this project. Kovir Labs supports and maintains it.',
+  incubating: 'Being evaluated by the kovir.org team. There is no support promise yet.',
+  lab: 'An experiment from the lab. Use it, enjoy it, and expect rough edges.',
+}[view.support];
+const os = view.platforms.filter((p) => ['windows', 'macos', 'linux'].includes(p)).map((p) => PLATFORM_LABEL[p]);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: view.name,
+  description: view.tagline,
+  applicationCategory: view.category === 'education' ? 'EducationalApplication' : 'DeveloperApplication',
+  ...(os.length ? { operatingSystem: os.join(', ') } : {}),
+  ...(view.release ? { softwareVersion: view.release.tag.replace(/^v/, '') } : {}),
+  ...(view.license ? { license: `https://spdx.org/licenses/${view.license}.html` } : {}),
+  url: new URL(`/projects/${view.slug}`, Astro.site).href,
+  codeRepository: view.repoUrl,
+  publisher: { '@type': 'Organization', name: 'Kovir LLC', url: 'https://www.kovir.org' },
+};
+---
+
+<Base title={view.name} description={view.tagline} ogImage={screenshots[0]?.src} jsonLd={jsonLd}>
+  <section class="section container">
+    <p class="crumbs"><a href="/projects">Projects</a> /</p>
+    <header class="hero">
+      {icon && <Image src={icon} alt="" width={88} height={88} class="icon" loading="eager" />}
+      <div>
+        <h1>{view.name}</h1>
+        <p class="lede">{view.tagline}</p>
+        <div class="facts-row">
+          <SupportBadge support={view.support} />
+          <span class="mono status">{STATUS_LABEL[view.status]}</span>
+          <ReleaseBadge release={view.release} link />
+          {view.license && <span class="mono muted">{view.license}</span>}
+          {view.stars !== null && view.stars > 0 && <span class="mono muted">★ {view.stars}</span>}
+        </div>
+      </div>
+    </header>
+    <DownloadButtons view={view} />
+  </section>
+
+  {
+    screenshots.length > 0 && (
+      <section class="container gallery" aria-label="Screenshots">
+        {screenshots.map((s, i) => (
+          <Image src={s.src} alt={s.alt} widths={[640, 1100, 1600]} sizes="(min-width: 72rem) 70rem, 100vw" loading={i === 0 ? 'eager' : 'lazy'} />
+        ))}
+      </section>
+    )
+  }
+
+  <section class="section container layout">
+    <div class="prose">
+      <Content />
+    </div>
+    <aside class="card side" aria-label="Project facts">
+      <h2 class="visually-hidden">Project facts</h2>
+      <dl>
+        <dt>Support</dt><dd>{supportNote}</dd>
+        <dt>Who it's for</dt><dd>{view.audience}</dd>
+        <dt>Category</dt><dd>{CATEGORY_LABEL[view.category]}</dd>
+        <dt>Platforms</dt><dd><PlatformList platforms={view.platforms} /></dd>
+        {view.license && (<><dt>License</dt><dd class="mono">{view.license}</dd></>)}
+        <dt>Source</dt><dd><a href={view.repoUrl}>{view.repo}</a></dd>
+        {view.website && (<><dt>Website</dt><dd><a href={view.website}>{new URL(view.website).host}</a></dd></>)}
+        {view.docs && (<><dt>Docs</dt><dd><a href={view.docs}>User guide</a></dd></>)}
+        {view.forkOf && (<><dt>Credit</dt><dd>Continuation of <a href={`https://github.com/${view.forkOf}`}>{view.forkOf}</a></dd></>)}
+        {view.topics.length > 0 && (<><dt>Topics</dt><dd class="topics">{view.topics.join(' · ')}</dd></>)}
+      </dl>
+    </aside>
+  </section>
+
+  <section class="band section-tight">
+    <div class="container involved">
+      <h2>Get involved</h2>
+      <ul class="links">
+        <li><a href={`/contact?type=idea&project=${view.slug}`}>Request a feature</a></li>
+        <li><a href="/ideas">Browse community ideas</a></li>
+        <li><a href={`${view.repoUrl}/issues`}>Report a bug on GitHub</a></li>
+        {view.community?.contributing && <li><a href={`${view.repoUrl}/blob/HEAD/CONTRIBUTING.md`}>Contributing guide</a></li>}
+        {view.community?.codeOfConduct && <li><a href={`${view.repoUrl}/blob/HEAD/CODE_OF_CONDUCT.md`}>Code of conduct</a></li>}
+        {view.community?.securityPolicy && <li><a href={`${view.repoUrl}/security/policy`}>Security policy</a></li>}
+      </ul>
+      {
+        view.ideas.length > 0 && (
+          <>
+            <h3>Related ideas</h3>
+            <ul class="links">
+              {view.ideas.map((n) => (
+                <li><a href={`${forum}/${n}`}>Idea #{n} on the forum</a></li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .crumbs { margin-bottom: 1rem; font-size: 0.9rem; }
+  .hero { display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 1.75rem; }
+  .hero .icon { width: 88px; height: 88px; border-radius: 18px; flex: none; object-fit: contain; }
+  .hero h1 { margin-bottom: 0.25rem; }
+  .facts-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }
+  .status { font-size: 0.85rem; }
+  @media (max-width: 36rem) { .hero { flex-direction: column; } }
+  .gallery { display: grid; gap: 1.25rem; }
+  .gallery img { width: 100%; border-radius: var(--radius); border: 1px solid var(--border); }
+  .layout { display: grid; gap: 2rem; }
+  @media (min-width: 60rem) { .layout { grid-template-columns: minmax(0, 1fr) 20rem; align-items: start; } }
+  dl { margin: 0; display: grid; gap: 0.35rem; }
+  dt { font: 400 0.75rem/1.2 var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-top: 0.6rem; }
+  dt:first-child { margin-top: 0; }
+  dd { margin: 0; overflow-wrap: anywhere; }
+  .topics { font-size: 0.9rem; color: var(--muted); }
+  .links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; list-style: none; padding: 0; margin: 0 0 1rem; }
+  .involved h3 { margin-top: 1rem; }
+</style>
