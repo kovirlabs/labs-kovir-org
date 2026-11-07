@@ -13,6 +13,9 @@ const projects = defineCollection({
       .object({
         name: z.string(),
         repo: z.string().regex(/^kovirlabs\/[\w.-]+$/, 'repo must be kovirlabs/<name>'),
+        // Other public repos this page covers (a family of tools under one page). They link to
+        // this page from the "All repositories" table.
+        repos: z.array(z.string().regex(/^kovirlabs\/[\w.-]+$/, 'repos must be kovirlabs/<name>')).default([]),
         tagline: z.string().max(110),
         audience: z.string(),
         support: z.enum(['official', 'incubating', 'lab']),

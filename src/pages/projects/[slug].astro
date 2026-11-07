@@ -65,7 +65,7 @@ const jsonLd = {
             <time datetime={release.iso} data-tag-time="relative">{release.date}</time>
           </>
         ) : (
-          'No release yet. Build from source.'
+          view.website ? 'No release of its own yet.' : 'No release yet. Build from source.'
         )
       }
       {view.license && <> · {view.license}</>}
