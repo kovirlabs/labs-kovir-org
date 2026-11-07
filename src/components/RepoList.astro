@@ -1,0 +1,41 @@
+---
+import type { RepoRow } from '../lib/all-repos.ts';
+
+interface Props { rows: RepoRow[] }
+const { rows } = Astro.props;
+---
+
+<ul class="repos">
+  {
+    rows.map((r) => (
+      <li class="repo">
+        <div class="head">
+          <a class="name mono" href={r.url}>{r.name}</a>
+          {r.projectHref ? (
+            <a class="tag reviewed" href={r.projectHref}>Project page</a>
+          ) : (
+            <span class="tag">Not reviewed</span>
+          )}
+        </div>
+        {r.description && <p class="desc">{r.description}</p>}
+        <p class="meta muted">
+          {r.language && <span>{r.language}</span>}
+          {r.fork && <span>Fork</span>}
+          <span>Updated <time datetime={r.updatedIso}>{r.updated}</time></span>
+        </p>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .repos { list-style: none; margin: 1.25rem 0 0; padding: 0; border-top: 1px solid var(--border); }
+  .repo { padding: 0.9rem 0; border-bottom: 1px solid var(--border); }
+  .head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.75rem; }
+  .name { font-weight: 500; font-size: 1rem; overflow-wrap: anywhere; }
+  .tag { font: 400 0.7rem/1 var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; padding: 0.3rem 0.5rem; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
+  .tag.reviewed { border-color: var(--highlight); color: var(--highlight); text-decoration: none; }
+  .tag.reviewed:hover { text-decoration: underline; }
+  .desc { margin: 0.35rem 0 0; max-width: 46rem; }
+  .meta { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; margin: 0.35rem 0 0; font-size: 0.875rem; }
+</style>

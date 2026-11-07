@@ -16,7 +16,16 @@ const previous: Snapshot = {
   fetchedAt: '2026-10-24T06:00:00Z',
   repos: { 'kovirlabs/nu': previousFacts },
   ideas: [{ number: 1, title: 'old idea' } as Snapshot['ideas'][number]],
-  publicRepos: ['kovirlabs/nu'],
+  publicRepos: [
+    {
+      fullName: 'kovirlabs/nu',
+      url: 'https://github.com/kovirlabs/nu',
+      description: null,
+      language: 'Python',
+      pushedAt: '2026-10-01T00:00:00Z',
+      fork: true,
+    },
+  ],
 };
 const base = { previous, now: () => NOW };
 

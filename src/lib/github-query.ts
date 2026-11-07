@@ -1,6 +1,6 @@
 // One GitHub GraphQL request covers every curated repo, the forum's discussions, and the
 // org's public repo list. `normalize` turns the response into plain data and sorts errors.
-import type { Asset, IdeaFacts, Normalized, RepoFacts } from './types.ts';
+import type { Asset, IdeaFacts, Normalized, PublicRepo, RepoFacts } from './types.ts';
 
 export const ORG = 'kovirlabs';
 export const FORUM_REPO = 'kovirlabs/community';
@@ -40,7 +40,7 @@ export function buildQuery(repos: string[]): { query: string; aliases: Record<st
     ),
   );
   blocks.push(
-    `  org: organization(login: "${ORG}") {\n    repositories(first: 100, privacy: PUBLIC) { nodes { nameWithOwner isArchived } }\n  }`,
+    `  org: organization(login: "${ORG}") {\n    repositories(first: 100, privacy: PUBLIC) {\n      nodes { nameWithOwner url description primaryLanguage { name } pushedAt isFork isArchived isPrivate }\n    }\n  }`,
   );
   return { query: `query {\n${blocks.join('\n')}\n}`, aliases };
 }
@@ -72,6 +72,17 @@ function toRepoFacts(r: Raw): RepoFacts {
           ),
         }
       : null,
+  };
+}
+
+function toPublicRepo(r: Raw): PublicRepo {
+  return {
+    fullName: r.nameWithOwner,
+    url: r.url,
+    description: r.description ?? null,
+    language: r.primaryLanguage?.name ?? null,
+    pushedAt: r.pushedAt,
+    fork: Boolean(r.isFork),
   };
 }
 
@@ -114,7 +125,8 @@ export function normalize(json: unknown, aliases: Record<string, string>): Norma
 
   const orgRepos = data.org?.repositories?.nodes;
   if (Array.isArray(orgRepos)) {
-    out.publicRepos = orgRepos.filter((r: Raw) => !r.isArchived).map((r: Raw) => r.nameWithOwner);
+    // privacy: PUBLIC already filters, but a private repo must never be listed, so check again.
+    out.publicRepos = orgRepos.filter((r: Raw) => !r.isArchived && !r.isPrivate).map(toPublicRepo);
   }
   return out;
 }

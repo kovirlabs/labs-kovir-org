@@ -3,7 +3,7 @@
     "r0": {
       "nameWithOwner": "kovirlabs/toril",
       "url": "https://github.com/kovirlabs/toril",
-      "description": "A small, fast desktop WYSIWYG markdown editor for plain .md files \u2014 inline editing built on Tauri, Rust, and Milkdown. Obsidian-vault compatible.",
+      "description": "A small, fast desktop WYSIWYG markdown editor for plain .md files — inline editing built on Tauri, Rust, and Milkdown. Obsidian-vault compatible.",
       "stargazerCount": 7,
       "pushedAt": "2026-10-16T00:13:00Z",
       "isArchived": false,
@@ -167,15 +167,37 @@
         "nodes": [
           {
             "nameWithOwner": "kovirlabs/toril",
-            "isArchived": false
+            "isArchived": false,
+            "url": "https://github.com/kovirlabs/toril",
+            "description": "A small, fast desktop markdown editor.",
+            "primaryLanguage": {
+              "name": "TypeScript"
+            },
+            "pushedAt": "2026-10-20T10:00:00Z",
+            "isFork": false,
+            "isPrivate": false
           },
           {
             "nameWithOwner": "kovirlabs/nu",
-            "isArchived": false
+            "isArchived": false,
+            "url": "https://github.com/kovirlabs/nu",
+            "description": null,
+            "primaryLanguage": {
+              "name": "Python"
+            },
+            "pushedAt": "2026-10-01T10:00:00Z",
+            "isFork": true,
+            "isPrivate": false
           },
           {
             "nameWithOwner": "kovirlabs/old-thing",
-            "isArchived": true
+            "isArchived": true,
+            "url": "https://github.com/kovirlabs/old-thing",
+            "description": "Old.",
+            "primaryLanguage": null,
+            "pushedAt": "2024-01-01T00:00:00Z",
+            "isFork": false,
+            "isPrivate": false
           }
         ]
       }
