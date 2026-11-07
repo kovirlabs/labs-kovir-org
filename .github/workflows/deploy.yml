@@ -1,0 +1,37 @@
+# Build the Astro site and push it to Netlify (site `kovir-labs`). Netlify has no GitHub
+# connection; the site is manual-deploy and this workflow is the only thing that publishes it.
+name: Deploy to Netlify
+
+on:
+  push:
+    branches: [main]
+  # Daily rebuild so GitHub release data stays current once the snapshot refresh lands.
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Never run two production deploys at once; the newest push wins.
+concurrency:
+  group: netlify-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      # --no-build: the CLI builds by default; we already built above.
+      - run: npx --yes netlify-cli@27 deploy --prod --no-build --dir=dist --message "${{ github.sha }}"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
