@@ -3,7 +3,9 @@ name: Toril
 repo: kovirlabs/toril
 tagline: A desktop markdown editor that renders as you type and keeps your notes as plain files.
 audience: Writers, staff, and teams who keep their notes and documents in plain Markdown.
-support: lab
+support: official
+supportedSince: 2026-11-07
+featured: true
 status: stable
 order: 10
 category: desktop-app

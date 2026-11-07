@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-07T16:56:21.093Z",
+  "fetchedAt": "2026-11-07T18:16:01.430Z",
   "repos": {
     "kovirlabs/first-principles-code": {
       "fullName": "kovirlabs/first-principles-code",
@@ -21,7 +21,7 @@
         "teaching",
         "tkinter"
       ],
-      "pushedAt": "2026-11-07T01:19:31Z",
+      "pushedAt": "2026-11-07T17:04:14Z",
       "archived": false,
       "hasContributing": false,
       "hasCodeOfConduct": false,
@@ -126,7 +126,7 @@
         "stylesheet",
         "wcag"
       ],
-      "pushedAt": "2026-11-07T16:35:24Z",
+      "pushedAt": "2026-11-07T17:05:20Z",
       "archived": false,
       "hasContributing": false,
       "hasCodeOfConduct": false,
@@ -197,7 +197,7 @@
         "static-site",
         "templates"
       ],
-      "pushedAt": "2026-11-07T16:22:37Z",
+      "pushedAt": "2026-11-07T17:04:37Z",
       "archived": false,
       "hasContributing": false,
       "hasCodeOfConduct": false,
@@ -285,6 +285,20 @@
       "pushedAt": "2026-11-07T16:11:53Z",
       "archived": false,
       "hasContributing": false,
+      "hasCodeOfConduct": false,
+      "hasSecurityPolicy": false,
+      "latestRelease": null
+    },
+    "kovirlabs/tds-openapi": {
+      "fullName": "kovirlabs/tds-openapi",
+      "url": "https://github.com/kovirlabs/tds-openapi",
+      "description": null,
+      "stars": 0,
+      "license": "Apache-2.0",
+      "topics": [],
+      "pushedAt": "2026-10-26T00:57:08Z",
+      "archived": false,
+      "hasContributing": true,
       "hasCodeOfConduct": false,
       "hasSecurityPolicy": false,
       "latestRelease": null
@@ -481,7 +495,7 @@
       "url": "https://github.com/kovirlabs/first-principles-code",
       "description": "Teaching template that helps engineers solve real problems in Python instead of proprietary technical programming languages. 11 documented engineering domain classes, a unit-aware Beam dataclass with Pint, solve_ivp/curve_fit examples, a tkinter console GUI, and a pytest suite.",
       "language": "Python",
-      "pushedAt": "2026-11-07T01:19:31Z",
+      "pushedAt": "2026-11-07T17:04:14Z",
       "fork": false
     },
     {
@@ -489,7 +503,7 @@
       "url": "https://github.com/kovirlabs/tagbrush",
       "description": "Classless CSS for semantic HTML and Markdown. One <link> gives you page layout, dark mode, forms, code highlighting and accessible colors. About 8.5 KB, no build, no classes, ready for AI coding agents.",
       "language": "HTML",
-      "pushedAt": "2026-11-07T16:35:24Z",
+      "pushedAt": "2026-11-07T17:05:20Z",
       "fork": false
     },
     {
@@ -533,11 +547,19 @@
       "fork": false
     },
     {
+      "fullName": "kovirlabs/tds-openapi",
+      "url": "https://github.com/kovirlabs/tds-openapi",
+      "description": null,
+      "language": "Python",
+      "pushedAt": "2026-10-26T00:57:08Z",
+      "fork": false
+    },
+    {
       "fullName": "kovirlabs/labs-kovir-org",
       "url": "https://github.com/kovirlabs/labs-kovir-org",
       "description": null,
       "language": "TypeScript",
-      "pushedAt": "2026-11-07T16:41:01Z",
+      "pushedAt": "2026-11-07T17:57:44Z",
       "fork": false
     },
     {
@@ -569,7 +591,7 @@
       "url": "https://github.com/kovirlabs/tagkit",
       "description": "Copy-paste page templates and snippets in plain semantic HTML, a build-time include tool, and themes for Pandoc, MkDocs, and Hugo. Styled by TagBrush.css, made to behave by TagAction, checked by TagCheck.",
       "language": "HTML",
-      "pushedAt": "2026-11-07T16:22:37Z",
+      "pushedAt": "2026-11-07T17:04:37Z",
       "fork": false
     },
     {

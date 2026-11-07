@@ -3,7 +3,9 @@ name: Nu
 repo: kovirlabs/nu
 tagline: A simple Python code editor for beginners, continuing the much-loved Mu editor.
 audience: Teachers, students and beginner programmers, in classrooms and at home.
-support: lab
+support: official
+supportedSince: 2026-11-07
+featured: true
 status: beta
 order: 30
 category: education

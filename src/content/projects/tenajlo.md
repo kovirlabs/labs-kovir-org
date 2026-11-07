@@ -3,7 +3,9 @@ name: Tenajlo
 repo: kovirlabs/tenajlo
 tagline: A desktop Git client for self-hosted Forgejo, for people who'd rather not learn the command line.
 audience: Engineering and operations teams that version code, PLC exports, CAD files and documents on their own Forgejo server.
-support: lab
+support: official
+supportedSince: 2026-11-07
+featured: true
 status: stable
 order: 20
 category: desktop-app
