@@ -1,0 +1,29 @@
+/* Kovir Labs theme for TagBrush.css. TagBrush styles the HTML; this file only sets Kovir's
+   palette and fonts through TagBrush's documented variables, plus the few brand touches
+   TagBrush can't express. No class selectors: rules target ids, structure and documented
+   attributes, so TagCheck stays clean. */
+
+/* Self-hosted fonts (the CSP allows no font CDN). */
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/manrope/500.css';
+@import '@fontsource/manrope/700.css';
+@import '@fontsource/jetbrains-mono/400.css';
+
+/* Kovir palette, light / dark. The site follows the reader's color scheme. */
+:root {
+  --color-primary: #3a787a;
+  --color-background: light-dark(#f1eee9, #232626);
+  --color-surface: light-dark(#ffffff, #2d3131);
+  --color-border: light-dark(#d6cfc3, #3e4444);
+  --color-text: light-dark(#323232, #f1eee9);
+  --color-heading: light-dark(#323232, #f1eee9);
+  --color-text-muted: light-dark(#5c5852, #bdb7ad);
+  --color-highlight: light-dark(#8d440f, #dfad05);
+  --font-family-heading: 'Manrope', system-ui, sans-serif;
+  --font-family-base: 'Inter', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --border-radius: 10px;
+  /* The hero sits on a soft tint toward Kovir's dark teal. */
+  --hero-background: color-mix(in srgb, var(--color-background) 82%, #2a5657);
+}
