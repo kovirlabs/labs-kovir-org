@@ -11,6 +11,8 @@ export type ProjectEntry = {
   slug: string;
   name: string;
   repo: string;
+  /** Other repos this page covers; see content.config.ts. */
+  repos?: string[];
   tagline: string;
   audience: string;
   support: Support;

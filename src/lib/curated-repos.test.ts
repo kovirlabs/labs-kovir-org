@@ -11,3 +11,18 @@ test('readCuratedRepos: reads repo from frontmatter only, quoted or not, sorted 
   ];
   assert.deepEqual(readCuratedRepos(files), ['kovirlabs/nu', 'kovirlabs/toril']);
 });
+
+test('readCuratedRepos: a page that covers several repos lists them in repos:, flow or block style', () => {
+  const files = [
+    { name: 'tag-family.md', text: '---\nrepo: kovirlabs/tagstack\nrepos: [kovirlabs/tagbrush, "kovirlabs/tagaction"]\nname: Tag\n---\n' },
+    { name: 'kit.md', text: "---\nrepo: kovirlabs/tagkit\nrepos:\n  - kovirlabs/tagkit-jekyll\n  - 'kovirlabs/tagkit-wordpress'\nname: Kit\n---\n" },
+  ];
+  assert.deepEqual(readCuratedRepos(files), [
+    'kovirlabs/tagaction',
+    'kovirlabs/tagbrush',
+    'kovirlabs/tagkit',
+    'kovirlabs/tagkit-jekyll',
+    'kovirlabs/tagkit-wordpress',
+    'kovirlabs/tagstack',
+  ]);
+});

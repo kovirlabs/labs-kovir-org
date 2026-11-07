@@ -36,3 +36,8 @@ export function toRepoRows(publicRepos: PublicRepo[], curated: Record<string, st
       };
     });
 }
+
+/** Maps every repo a project page covers (its `repo` plus any `repos`) to the page's slug. */
+export function curatedSlugs(projects: { slug: string; repo: string; repos: string[] }[]): Record<string, string> {
+  return Object.fromEntries(projects.flatMap((p) => [p.repo, ...p.repos].map((r) => [r, p.slug])));
+}

@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import RepoList from '../../components/RepoList.astro';
-import { toRepoRows } from '../../lib/all-repos.ts';
+import { curatedSlugs, toRepoRows } from '../../lib/all-repos.ts';
 import { INFRA_REPOS } from '../../lib/catalog.ts';
 import { loadSnapshot } from '../../lib/snapshot.ts';
 import { getProjects } from '../../lib/project-data.ts';
@@ -17,7 +17,7 @@ const sections: { support: Support; title: string; note: string }[] = [
 ];
 const categories = [...new Set(projects.map((p) => p.view.category))];
 const platforms = [...new Set(projects.flatMap((p) => p.view.platforms))];
-const curated = Object.fromEntries(projects.map((p) => [p.view.repo, p.view.slug]));
+const curated = curatedSlugs(projects.map((p) => ({ slug: p.view.slug, repo: p.view.repo, repos: p.view.repos ?? [] })));
 const repoRows = toRepoRows(loadSnapshot().publicRepos, curated, INFRA_REPOS);
 ---
 

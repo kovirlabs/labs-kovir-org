@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { toRepoRows } from './all-repos.ts';
+import { curatedSlugs, toRepoRows } from './all-repos.ts';
 import type { PublicRepo } from './types.ts';
 
 const repo = (name: string, pushedAt: string, extra: Partial<PublicRepo> = {}): PublicRepo => ({
@@ -58,4 +58,19 @@ test('toRepoRows: missing description and language stay null', () => {
 test('toRepoRows: blank descriptions count as missing', () => {
   const [row] = toRepoRows([repo('blank', '2026-01-01T00:00:00Z', { description: '   ' })], {}, []);
   assert.equal(row.description, null);
+});
+
+test('curatedSlugs: a project page claims its own repo and every repo in repos', () => {
+  assert.deepEqual(
+    curatedSlugs([
+      { slug: 'toril', repo: 'kovirlabs/toril', repos: [] },
+      { slug: 'tag-family', repo: 'kovirlabs/tagstack', repos: ['kovirlabs/tagbrush', 'kovirlabs/tagaction'] },
+    ]),
+    {
+      'kovirlabs/toril': 'toril',
+      'kovirlabs/tagstack': 'tag-family',
+      'kovirlabs/tagbrush': 'tag-family',
+      'kovirlabs/tagaction': 'tag-family',
+    },
+  );
 });
