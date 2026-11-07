@@ -1,5 +1,8 @@
 ---
+// Ideas as a table: TagAction sorts it by any column. Upvotes and comments carry <data value>
+// so they sort as numbers; the status badge comes from src/lib/tones.ts.
 import type { IdeaView } from '../lib/ideas.ts';
+import { ideaTone } from '../lib/tones.ts';
 
 interface Props { ideas: IdeaView[]; empty: string }
 const { ideas, empty } = Astro.props;
@@ -7,26 +10,25 @@ const { ideas, empty } = Astro.props;
 
 {
   ideas.length === 0 ? (
-    <p class="muted">{empty}</p>
+    empty && <p>{empty}</p>
   ) : (
-    <ol class="ideas" role="list">
-      {ideas.map((idea) => (
-        <li class="card idea">
-          <a href={idea.url} class="title">{idea.title}</a>
-          <span class="mono muted counts">
-            <span><span aria-hidden="true">▲</span> {idea.upvotes}<span class="visually-hidden"> upvotes</span></span>
-            <span><span aria-hidden="true">💬</span> {idea.comments}<span class="visually-hidden"> comments</span></span>
-          </span>
-        </li>
-      ))}
-    </ol>
+    <table>
+      <thead>
+        <tr><th>Idea</th><th>Upvotes</th><th>Comments</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        {ideas.map((idea) => {
+          const badge = ideaTone(idea.status);
+          return (
+            <tr>
+              <td><a href={idea.url}>{idea.title}</a></td>
+              <td><data value={idea.upvotes}>{idea.upvotes}</data></td>
+              <td><data value={idea.comments}>{idea.comments}</data></td>
+              <td><mark data-tone={badge.tone}>{badge.label}</mark></td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   )
 }
-
-<style>
-  .ideas { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
-  .idea { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem 1rem; padding: 0.9rem 1.1rem; }
-  .title { color: var(--text); font-weight: 700; text-decoration: none; }
-  .title:hover { text-decoration: underline; }
-  .counts { display: flex; gap: 1rem; font-size: 0.85rem; }
-</style>
